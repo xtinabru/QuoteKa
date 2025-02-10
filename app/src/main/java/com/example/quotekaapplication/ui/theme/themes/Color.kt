@@ -1,4 +1,4 @@
-package com.example.quotekaapplication.ui.theme
+package com.example.quotekaapplication.ui.theme.themes
 
 import androidx.compose.ui.graphics.Color
 
