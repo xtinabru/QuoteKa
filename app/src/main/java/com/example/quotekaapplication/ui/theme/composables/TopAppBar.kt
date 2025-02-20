@@ -29,14 +29,6 @@ fun TopAppBar(title: String, navController: NavController) {
         title = {
             Text(text = title)
         },
-        navigationIcon = {
-            IconButton(onClick = { /* smth */ }) {
-                Icon(
-                    imageVector = Icons.Filled.Menu,
-                    contentDescription = "Open Menu"
-                )
-            }
-        },
         actions = {
             IconButton(onClick = { expanded = !expanded }) {
                 Icon(
@@ -52,13 +44,15 @@ fun TopAppBar(title: String, navController: NavController) {
                     text = { Text("Info") },
                     onClick = {
                         expanded = false
-                        navController.navigate("info") }
+                        navController.navigate("info")
+                    }
                 )
                 DropdownMenuItem(
                     text = { Text("Settings") },
                     onClick = {
                         expanded = false
-                        navController.navigate("settings") }
+                        navController.navigate("settings")
+                    }
                 )
             }
         },

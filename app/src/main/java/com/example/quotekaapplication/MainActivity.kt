@@ -17,10 +17,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             QuotekaApplicationTheme {
-                // Создаем navController для навигации
                 val navController = rememberNavController()
-
-                // Используем ScaffoldApp и передаем navController
                 ScaffoldApp()
             }
         }
