@@ -1,6 +1,8 @@
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -12,11 +14,13 @@ import com.example.quotekaapplication.ui.theme.screens.SettingsScreen
 fun ScaffoldApp() {
     val navController = rememberNavController()
     Scaffold(
+        modifier = Modifier.fillMaxSize(),
         topBar = {
-            // Добавляем TopAppBar с названием "Main Screen"
+
             TopAppBar(title = "Main Screen", navController = navController)
         },
         content = { paddingValues -> // paddings btwn elements
+
             NavHost(
                 navController = navController,
                 startDestination = "home"
@@ -25,6 +29,7 @@ fun ScaffoldApp() {
                 composable(route = "info")  { QuoteInfo(navController, paddingValues) }
                 composable(route = "settings")  { SettingsScreen(navController, paddingValues) }
             }
-        }
+        },
+        bottomBar = { BottomBar(navController) }
     )
 }
