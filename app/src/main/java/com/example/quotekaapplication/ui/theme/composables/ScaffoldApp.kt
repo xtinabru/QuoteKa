@@ -30,7 +30,9 @@ fun ScaffoldApp() {
         modifier = Modifier.fillMaxSize(),
         topBar = {
 
-            TopAppBar(title = "Main Screen", navController = navController)
+            if (isAuthenticated) { // show if is logged in
+                TopAppBar(title = "Main Screen", navController = navController)
+            }
         },
         content = { paddingValues -> // paddings btwn elements
 
@@ -51,6 +53,8 @@ fun ScaffoldApp() {
                 composable("register") { RegisterScreen(navController, authViewModel) }
             }
         },
-        bottomBar = { BottomBar(navController) }
+        bottomBar = {
+            if (isAuthenticated) { BottomBar(navController) }
+        }
     )
 }

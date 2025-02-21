@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 
 class AuthViewModel : ViewModel() {
+
     var isAuthenticated = mutableStateOf(false)
 
     fun login() {
@@ -15,7 +16,6 @@ class AuthViewModel : ViewModel() {
         // auto authorization
         isAuthenticated.value = true
     }
-    // Метод для выхода из аккаунта
     fun logout() {
         isAuthenticated.value = false
     }

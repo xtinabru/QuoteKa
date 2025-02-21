@@ -67,14 +67,14 @@ fun OnBoardingScreen(navController: NavController) {
             }
         }
 
-        // Кнопки Get Started и Login
+        // Buttons Get Started и Login
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Button(
                 onClick = {
-                    navController.navigate("home") // navigate to home page/screen
+                    navController.navigate("register") // navigate to home page/screen
                 },
                 modifier = Modifier.weight(1f)
             ) {

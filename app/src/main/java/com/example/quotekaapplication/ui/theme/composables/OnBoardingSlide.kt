@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,8 +39,6 @@ fun OnBoardingSlide(data: OnBoardingData) {
             contentDescription = null,
             modifier = Modifier.
             fillMaxWidth()
-
-
                 .size(400.dp)
                 .clip(CircleShape)
                 .background(Color.White
