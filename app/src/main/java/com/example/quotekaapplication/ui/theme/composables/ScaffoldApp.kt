@@ -8,6 +8,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.quotekaapplication.ui.theme.composables.BottomAppBar.BottomBar
 import com.example.quotekaapplication.ui.theme.screens.AddQuoteScreen
 import com.example.quotekaapplication.ui.theme.screens.CategoriesScreen
 import com.example.quotekaapplication.ui.theme.screens.FavoriteScreen
@@ -30,7 +31,7 @@ fun ScaffoldApp() {
         topBar = {
 
             if (isAuthenticated) { // show if is logged in
-                TopAppBar(title = "Main Screen",
+                TopAppBarComponent(title = "Main Screen",
                     navController = navController,
                     authViewModel = authViewModel )
             }

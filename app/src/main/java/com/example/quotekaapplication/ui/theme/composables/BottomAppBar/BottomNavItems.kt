@@ -1,4 +1,4 @@
-package com.example.quotekaapplication.ui.theme.composables.bars
+package com.example.quotekaapplication.ui.theme.composables.BottomAppBar
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle

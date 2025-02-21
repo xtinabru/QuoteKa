@@ -1,10 +1,11 @@
+package com.example.quotekaapplication.ui.theme.composables.BottomAppBar
+
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.quotekaapplication.ui.theme.composables.bars.BottomNavItemData
 
 @Composable
 fun BottomNavItem(

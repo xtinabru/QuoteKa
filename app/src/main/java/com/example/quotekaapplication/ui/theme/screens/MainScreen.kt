@@ -1,6 +1,4 @@
 package com.example.quotekaapplication.ui.theme.screens
-
-import TopAppBar
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer

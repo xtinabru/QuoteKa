@@ -1,4 +1,4 @@
-package com.example.quotekaapplication.ui.theme.composables.bars
+package com.example.quotekaapplication.ui.theme.composables.BottomAppBar
 
 import androidx.compose.ui.graphics.vector.ImageVector
 
