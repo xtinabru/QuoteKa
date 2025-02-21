@@ -8,7 +8,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.quotekaapplication.ui.models.AuthViewModel
 import com.example.quotekaapplication.ui.theme.screens.AddQuoteScreen
 import com.example.quotekaapplication.ui.theme.screens.CategoriesScreen
 import com.example.quotekaapplication.ui.theme.screens.FavoriteScreen

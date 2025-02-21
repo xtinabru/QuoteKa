@@ -21,8 +21,6 @@ fun MainScreen(navController: NavController, paddingValues: PaddingValues) {
         .padding(top = paddingValues.calculateTopPadding())
     )
     {
-
-
         Text("Quote of the day", style = MaterialTheme.typography.titleLarge)
         Spacer(modifier = Modifier.height(20.dp))
 

@@ -1,90 +1,49 @@
 package com.example.quotekaapplication.ui.theme.screens
 
+import AuthViewModel
 import androidx.compose.foundation.layout.*
-
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.example.quotekaapplication.ui.models.AuthViewModel
+
+
 
 @Composable
 fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
-    // state  --- then put to ViewMODEl!!!!
-    var username by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    // error state!
-    var errorMessage by remember { mutableStateOf("") }
-
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier = Modifier.fillMaxSize().padding(16.dp),
+        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Login", style = MaterialTheme.typography.titleLarge)
-
-        Spacer(modifier = Modifier.height(40.dp))
-
-        // Inputzzz
-        OutlinedTextField(
-            value = username,
-            onValueChange = { username = it },
-            label = { Text("Username") },
+        TextField(
+            value = email,
+            onValueChange = { email = it },
+            label = { Text("Email") },
             modifier = Modifier.fillMaxWidth()
         )
-
         Spacer(modifier = Modifier.height(16.dp))
-
-        OutlinedTextField(
+        TextField(
             value = password,
             onValueChange = { password = it },
             label = { Text("Password") },
             visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    // logic for login
-                }
-            )
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        Button(
-            onClick = {
-                if (username.isNotBlank() && password.isNotBlank()) {
-                    authViewModel.login()
-                    navController.navigate("home")
-                } else {
-                    errorMessage = "Please enter both username and password"
-                }
-            },
             modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Login")
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(onClick = { authViewModel.login(email, password) }) {
+            Text("Log In")
         }
-        if (errorMessage.isNotBlank()) {
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(errorMessage, color = MaterialTheme.colorScheme.error)
+
+        TextButton(onClick = { navController.navigate("register") }) {
+            Text("Don't have an account? Register")
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun LoginScreenPreview() {
-    LoginScreen(navController = rememberNavController(), authViewModel = AuthViewModel())
 }

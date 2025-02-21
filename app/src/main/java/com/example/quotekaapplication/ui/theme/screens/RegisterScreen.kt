@@ -1,91 +1,76 @@
 package com.example.quotekaapplication.ui.theme.screens
 
+import AuthViewModel
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.example.quotekaapplication.ui.models.AuthViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel) {
-    // State -----PUT IT AWAY TO ViewMoDEL!
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
-
-    var errorMessage by remember { mutableStateOf("") }
+    val email = remember { mutableStateOf("") }
+    val password = remember { mutableStateOf("") }
+    val confirmPassword = remember { mutableStateOf("") }
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Register", style = MaterialTheme.typography.titleLarge)
-
-        Spacer(modifier = Modifier.height(40.dp))
-
-        // Inputz
-        OutlinedTextField(
-            value = username,
-            onValueChange = { username = it },
-            label = { Text("Username") },
+        TextField(
+            value = email.value,
+            onValueChange = { email.value = it },
+            label = { Text("Email") },
             modifier = Modifier.fillMaxWidth()
         )
+        Spacer(modifier = Modifier.height(8.dp))
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
+        TextField(
+            value = password.value,
+            onValueChange = { password.value = it },
             label = { Text("Password") },
-            visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Next
-            ),
-            keyboardActions = KeyboardActions(
-                onNext = { /* Move focus to next field */ }
-            )
+            visualTransformation = PasswordVisualTransformation()
         )
+        Spacer(modifier = Modifier.height(8.dp))
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        OutlinedTextField(
-            value = confirmPassword,
-            onValueChange = { confirmPassword = it },
+        TextField(
+            value = confirmPassword.value,
+            onValueChange = { confirmPassword.value = it },
             label = { Text("Confirm Password") },
-            visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    // logic for registration
-                }
-            )
+            visualTransformation = PasswordVisualTransformation()
         )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
+        Spacer(modifier = Modifier.height(16.dp))
 
         Button(
             onClick = {
-                if (username.isNotBlank() && password.isNotBlank() && confirmPassword == password) {
-                    authViewModel.login()
-                    navController.navigate("home")
+                if (password.value == confirmPassword.value) {
+                    // Здесь создаем нового пользователя через Firebase
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.value, password.value)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                // Если регистрация успешна
+                                authViewModel.isAuthenticated.value = true
+                                Toast.makeText(context, "Registration successful", Toast.LENGTH_SHORT).show()
+                                navController.navigate("home") // Переходим на главный экран
+                            } else {
+                                // Если произошла ошибка
+                                Toast.makeText(context, "Registration failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                            }
+                        }
                 } else {
-                    errorMessage = "Please fill in all fields correctly"
+                    Toast.makeText(context, "Passwords do not match", Toast.LENGTH_SHORT).show()
                 }
             },
             modifier = Modifier.fillMaxWidth()
@@ -93,15 +78,12 @@ fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel) {
             Text("Register")
         }
 
-        if (errorMessage.isNotBlank()) {
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(errorMessage, color = MaterialTheme.colorScheme.error)
+        Spacer(modifier = Modifier.height(8.dp))
+
+        TextButton(
+            onClick = { navController.navigate("login") }
+        ) {
+            Text("Already have an account? Login")
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun RegisterScreenPreview() {
-    RegisterScreen(navController = rememberNavController(), authViewModel = AuthViewModel())
 }
