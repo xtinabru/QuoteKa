@@ -1,29 +1,38 @@
-package com.example.quotekaapplication.ui.theme.composables.bars
-
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
-
-//This composable displays a navigation button with an icon
-// When the button is clicked, it navigates to the screen specified in the [item].
-// The navigation only occurs if the current screen is not the same as the target route.
-
+import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.quotekaapplication.ui.theme.composables.bars.BottomNavItemData
 
 @Composable
 fun BottomNavItem(
     navController: NavController,
     item: BottomNavItemData
 ) {
-    val currentRoute = navController.currentDestination?.route  // get the current route
+    // Get the current screen
+    val navBackStackEntry = navController.currentBackStackEntryAsState()
+
+    // Check if the current route matches the item's route to determine if it's active
+    val isActive = navBackStackEntry.value?.destination?.route == item.route
+
+    val iconTint = if (isActive) Color.Blue else Color.White // Active - Blue, Inactive - White
 
     IconButton(
         onClick = {
-            if (currentRoute != item.route) { // check in case not to go the same route
-                navController.navigate(item.route)
+            if (navBackStackEntry.value?.destination?.route != item.route) { // Check in case not to go the same route
+                navController.navigate(item.route) {
+                    // Optionally use a popUpTo to clear back stack when needed
+                    // popUpTo(navController.graph.startDestinationId) { inclusive = true }
+                }
             }
         }
     ) {
-        Icon(imageVector = item.icon, contentDescription = item.contentDescription)
+        Icon(
+            imageVector = item.icon,
+            contentDescription = item.contentDescription,
+            tint = iconTint // Apply the color based on the active state
+        )
     }
 }

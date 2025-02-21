@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import com.example.quotekaapplication.ui.theme.composables.bars.bottomNavItems
-import com.example.quotekaapplication.ui.theme.composables.bars.BottomNavItem
+
 
 @Composable
 fun BottomBar(navController: NavController) {
