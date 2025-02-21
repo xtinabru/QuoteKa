@@ -30,7 +30,9 @@ fun ScaffoldApp() {
         topBar = {
 
             if (isAuthenticated) { // show if is logged in
-                TopAppBar(title = "Main Screen", navController = navController)
+                TopAppBar(title = "Main Screen",
+                    navController = navController,
+                    authViewModel = authViewModel )
             }
         },
         content = { paddingValues -> // paddings btwn elements

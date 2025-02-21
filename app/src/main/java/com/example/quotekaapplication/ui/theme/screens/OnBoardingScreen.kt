@@ -19,11 +19,11 @@ import com.example.quotekaapplication.ui.theme.composables.OnBoardingSlide
 
 @Composable
 fun OnBoardingScreen(navController: NavController) {
-    val pagerState = rememberPagerState(pageCount = { 4 })
+    val pagerState = rememberPagerState(pageCount = { 3 })
 
     // Данные для слайдов
     val onBoardingData = listOf(
-        OnBoardingData("Welcome to Quoteca", "Explore the best quotes", R.drawable.image1),
+        OnBoardingData("Welcome to QuoteKa", "Explore the best quotes", R.drawable.image1),
         OnBoardingData("Find Your Inspiration", "Discover new motivational quotes", R.drawable.image2),
         OnBoardingData("Share With Friends", "Share your favorite quotes with others", R.drawable.image3),
 
