@@ -5,8 +5,10 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -34,7 +36,7 @@ fun BottomBar(navController: NavController) {
                     Icon(imageVector = Icons.Filled.Home, contentDescription = "Home")
                 }
                 IconButton(onClick = { navController.navigate("categories") }) {
-                    Icon(imageVector = Icons.Filled.Info, contentDescription = "Categories")
+                    Icon(imageVector = Icons.Filled.FavoriteBorder, contentDescription = "Categories")
                 }
 
                 IconButton(onClick = { navController.navigate("add_quote") }) {
