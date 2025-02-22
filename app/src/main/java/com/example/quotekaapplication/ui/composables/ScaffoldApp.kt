@@ -8,17 +8,19 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.quotekaapplication.ui.theme.composables.BottomAppBar.BottomBar
-import com.example.quotekaapplication.ui.theme.screens.AddQuoteScreen
-import com.example.quotekaapplication.ui.theme.screens.CategoriesScreen
-import com.example.quotekaapplication.ui.theme.screens.FavoriteScreen
-import com.example.quotekaapplication.ui.theme.screens.LoginScreen
-import com.example.quotekaapplication.ui.theme.screens.MainScreen
-import com.example.quotekaapplication.ui.theme.screens.OnBoardingScreen
-import com.example.quotekaapplication.ui.theme.screens.ProfileScreen
-import com.example.quotekaapplication.ui.theme.screens.QuoteInfo
-import com.example.quotekaapplication.ui.theme.screens.RegisterScreen
-import com.example.quotekaapplication.ui.theme.screens.SettingsScreen
+import com.example.quotekaapplication.ui.composables.BottomAppBar.BottomBar
+import com.example.quotekaapplication.ui.screens.AddQuoteScreen
+import com.example.quotekaapplication.ui.screens.CategoriesScreen
+import com.example.quotekaapplication.ui.screens.FavoriteScreen
+import com.example.quotekaapplication.ui.screens.LoginScreen
+import com.example.quotekaapplication.ui.screens.MainScreen
+import com.example.quotekaapplication.ui.screens.OnBoardingScreen.OnBoardingScreen
+
+import com.example.quotekaapplication.ui.screens.ProfileScreen
+import com.example.quotekaapplication.ui.screens.QuoteInfo
+import com.example.quotekaapplication.ui.screens.RegisterScreen
+import com.example.quotekaapplication.ui.screens.SettingsScreen
+import com.example.quotekaapplication.ui.viewmodels.OnBoardingViewModel
 
 @Composable
 fun ScaffoldApp() {
@@ -50,7 +52,10 @@ fun ScaffoldApp() {
                 composable("favorite") { FavoriteScreen() }
                 composable(route = "settings")  { SettingsScreen(navController, paddingValues) }
                 composable("profile") { ProfileScreen() }
-                composable("onboarding") { OnBoardingScreen(navController) }
+                composable("onboarding") {
+                    val onBoardingViewModel: OnBoardingViewModel = viewModel()
+                    OnBoardingScreen(navController, onBoardingViewModel)
+                }
                 composable("login") { LoginScreen(navController, authViewModel) }
                 composable("register") { RegisterScreen(navController, authViewModel) }
             }

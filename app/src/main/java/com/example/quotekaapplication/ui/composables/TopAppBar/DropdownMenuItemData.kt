@@ -1,4 +1,4 @@
-package com.example.quotekaapplication.ui.theme.composables.TopAppBar
+package com.example.quotekaapplication.ui.composables.TopAppBar
 
 // represents an item in the dropdown menu
 data class DropdownMenuItemData(

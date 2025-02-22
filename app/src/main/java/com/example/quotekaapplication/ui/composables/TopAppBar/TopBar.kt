@@ -13,8 +13,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
-import com.example.quotekaapplication.ui.theme.composables.TopAppBar.DropdownMenuComponent
-import com.example.quotekaapplication.ui.theme.composables.TopAppBar.LogoutConfirmationDialog
+import com.example.quotekaapplication.ui.composables.TopAppBar.DropdownMenuComponent
+import com.example.quotekaapplication.ui.composables.TopAppBar.LogoutConfirmationDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

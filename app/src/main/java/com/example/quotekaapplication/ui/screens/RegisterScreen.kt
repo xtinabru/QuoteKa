@@ -1,4 +1,4 @@
-package com.example.quotekaapplication.ui.theme.screens
+package com.example.quotekaapplication.ui.screens
 
 import AuthViewModel
 import android.widget.Toast

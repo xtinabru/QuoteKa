@@ -1,4 +1,4 @@
-    package com.example.quotekaapplication.ui.theme.composables.TopAppBar
+    package com.example.quotekaapplication.ui.composables.TopAppBar
 
     import androidx.compose.material3.DropdownMenu
     import androidx.compose.material3.DropdownMenuItem

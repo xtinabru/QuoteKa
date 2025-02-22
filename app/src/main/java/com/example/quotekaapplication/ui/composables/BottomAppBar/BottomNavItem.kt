@@ -1,4 +1,4 @@
-package com.example.quotekaapplication.ui.theme.composables.BottomAppBar
+package com.example.quotekaapplication.ui.composables.BottomAppBar
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
