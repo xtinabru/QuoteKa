@@ -6,6 +6,7 @@ import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
+import com.example.quotekaapplication.ui.composables.BottomAppBar.BottomNavItemData
 
 
 // list of all the icons

@@ -1,6 +1,6 @@
 package com.example.quotekaapplication.ui.screens
 
-import AuthViewModel
+import com.example.quotekaapplication.ui.viewmodels.AuthViewModel
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*

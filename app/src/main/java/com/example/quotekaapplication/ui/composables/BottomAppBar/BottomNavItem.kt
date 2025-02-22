@@ -4,8 +4,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.quotekaapplication.ui.composables.BottomAppBar.BottomNavItemData
 
 @Composable
 fun BottomNavItem(
@@ -37,3 +39,10 @@ fun BottomNavItem(
         )
     }
 }
+
+data class BottomNavItemData(
+    val route: String,
+    val icon: ImageVector,
+    val contentDescription: String,
+
+    )

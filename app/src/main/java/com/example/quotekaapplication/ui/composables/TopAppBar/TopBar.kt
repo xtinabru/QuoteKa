@@ -15,6 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
 import com.example.quotekaapplication.ui.composables.TopAppBar.DropdownMenuComponent
 import com.example.quotekaapplication.ui.composables.TopAppBar.LogoutConfirmationDialog
+import com.example.quotekaapplication.ui.viewmodels.AuthViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

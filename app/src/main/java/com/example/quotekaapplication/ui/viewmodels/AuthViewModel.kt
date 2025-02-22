@@ -1,3 +1,5 @@
+package com.example.quotekaapplication.ui.viewmodels
+
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
