@@ -1,11 +1,15 @@
-package com.example.quotekaapplication.ui.theme.themes
+package com.example.quotekaapplication.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+// Main colors
+val Purple = Color(0xFF54408C)
+val Grey = Color(0xFF6F6E6E)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+// Backgrnds
+val BackgroundLight = Color(0xFFFFFFFF)
+val BackgroundDark = Color(0xFF10052F)
+
+// Дополнительные цвета
+val AdditionalColor = Color(0xFFCCC2DC)
+val BlackFonts = Color(0xFF151515)

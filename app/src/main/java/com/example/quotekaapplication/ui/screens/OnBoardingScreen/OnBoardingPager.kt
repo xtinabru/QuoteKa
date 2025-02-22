@@ -15,6 +15,7 @@ fun OnBoardingPager(
     HorizontalPager(
         state = pagerState,
         modifier = Modifier.fillMaxSize()
+
     ) { page ->
         val item = onBoardingData[page]
         OnBoardingSlide(item)

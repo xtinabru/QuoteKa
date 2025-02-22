@@ -1,3 +1,4 @@
+
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -11,7 +12,8 @@ fun OnBoardingTitle(title: String) {
     Text(
         text = title,
         style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
-        modifier = Modifier.padding(horizontal = 16.dp),
+        modifier = Modifier
+            .padding(16.dp),
         color = MaterialTheme.colorScheme.onBackground
     )
 }

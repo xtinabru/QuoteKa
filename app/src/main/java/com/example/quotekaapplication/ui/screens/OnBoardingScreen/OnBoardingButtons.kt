@@ -1,35 +1,33 @@
 package com.example.quotekaapplication.ui.composables.onboarding
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
 fun OnBoardingButtons(navController: NavController) {
-    Row(
+    Column(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        Button(
+        //  "Get Started"
+        OnBoardingButton(
+            text = "Get Started",
             onClick = { navController.navigate("register") },
-            modifier = Modifier.weight(1f)
-        ) {
-            Text("Get Started")
-        }
-
-        Spacer(modifier = Modifier.width(16.dp))
-
-        TextButton(
+            backgroundColor = MaterialTheme.colorScheme.primary,
+            textColor = MaterialTheme.colorScheme.onSecondary
+        )
+        //"Login"
+        OnBoardingButton(
+            text = "Login",
             onClick = { navController.navigate("login") },
-            modifier = Modifier.weight(1f)
-        ) {
-            Text("Login", color = MaterialTheme.colorScheme.primary)
-        }
+            backgroundColor = MaterialTheme.colorScheme.surface,
+            textColor = MaterialTheme.colorScheme.primary
+        )
     }
 }
