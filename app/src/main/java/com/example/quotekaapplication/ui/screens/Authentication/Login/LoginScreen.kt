@@ -2,8 +2,6 @@ package com.example.quotekaapplication.ui.screens.Authentication.Login
 
 import com.example.quotekaapplication.ui.viewmodels.AuthViewModel
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -22,16 +20,7 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        IconButton(
-            onClick = { navController.popBackStack() },
-            modifier = Modifier.align(Alignment.Start)
-        ) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = "Back",
-                modifier = Modifier.size(24.dp)
-            )
-        }
+        BackButton(navController)
         Spacer(modifier = Modifier.height(32.dp))
 
         Text(
@@ -70,7 +59,7 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = { authViewModel.login(email, password) }, modifier = Modifier.fillMaxWidth()) {
-            Text("Log In")
+            Text("Sign in")
         }
         Spacer(modifier = Modifier.height(16.dp))
 
