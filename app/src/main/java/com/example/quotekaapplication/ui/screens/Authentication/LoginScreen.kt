@@ -13,13 +13,29 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.quotekaapplication.R
-
 import com.example.quotekaapplication.ui.composables.ElementsForAuth.CustomTextField
 import com.example.quotekaapplication.ui.composables.onboarding.OnBoardingButton
 import com.example.quotekaapplication.ui.screens.Authentication.Login.BackButton
 
 @Composable
 fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
+
+    // Track the validation error message
+    var errorMessage by remember { mutableStateOf("") }
+
+    // Handling registration logic with validation
+    val handleRegister = {
+        authViewModel.register(
+            onSuccess = {
+                // Navigate to home screen if registration is successful
+                navController.navigate("home")
+            },
+            onFailure = { error ->
+                // Display validation error message if validation fails
+                errorMessage = error
+            }
+        )
+    }
 
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
@@ -33,7 +49,7 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
             modifier = Modifier
                 .padding(12.dp)
                 .align(Alignment.Start),
-            )
+        )
         Spacer(modifier = Modifier.height(2.dp))
 
         Text(
@@ -62,24 +78,37 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
             label = "Password",
             isPassword = true
         )
+
+        // Display validation error message if any
+        if (errorMessage.isNotEmpty()) {
+            Text(
+                text = errorMessage,
+                color = MaterialTheme.colorScheme.error,
+                style = TextStyle(
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Normal,
+                    letterSpacing = 0.4.sp
+                ),
+                modifier = Modifier.padding(top = 8.dp)
+            )
+        }
+
         TextButton(onClick = { /* logic */ },
             modifier = Modifier.align(Alignment.Start)) {
             Text("Forgot Password?",
                 style = TextStyle(
                     color = MaterialTheme.colorScheme.primary,
-                    fontSize = 18   .sp,
+                    fontSize = 18.sp,
                     letterSpacing = 0.4.sp,
                     fontWeight = FontWeight.SemiBold,
-
                 )
-
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
 
         OnBoardingButton(
             text = "Login",
-            onClick = { navController.navigate("login") },
+            onClick = handleRegister,  // Use the handleRegister function to validate before navigating
             backgroundColor = MaterialTheme.colorScheme.primary,
             textColor = MaterialTheme.colorScheme.onSecondary
         )
@@ -104,7 +133,6 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
                 text = "Don't have an account? ",
                 style = TextStyle(
                     color = MaterialTheme.colorScheme.onBackground,
-
                     fontSize = 18.sp,
                     letterSpacing = 0.3.sp
                 )
@@ -113,14 +141,11 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
                 Text("Sign up",
                     style = TextStyle(
                         color = MaterialTheme.colorScheme.primary,
-
                         fontSize = 18.sp,
                         letterSpacing = 0.3.sp
                     ))
             }
         }
         Spacer(modifier = Modifier.height(8.dp))
-
-
     }
 }

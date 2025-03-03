@@ -8,20 +8,22 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.quotekaapplication.ui.composables.ElementsForAuth.CustomTextField
+import com.example.quotekaapplication.ui.composables.onboarding.OnBoardingButton
 import com.example.quotekaapplication.ui.screens.Authentication.Login.BackButton
 import com.example.quotekaapplication.ui.screens.Authentication.MainHeader
 
-import com.google.firebase.auth.FirebaseAuth
-
 @Composable
 fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel) {
-    val email = remember { mutableStateOf("") }
-    val password = remember { mutableStateOf("") }
-    val confirmPassword = remember { mutableStateOf("") }
     val context = LocalContext.current
+
+    // display validation error if there are any
+    val validationError = authViewModel.validationError.value
 
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
@@ -30,66 +32,115 @@ fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel) {
     ) {
         BackButton(navController)
         Spacer(modifier = Modifier.height(32.dp))
-        MainHeader(navController, text = "Welcome to the New Screen!")
-        Spacer(modifier = Modifier.height(8.dp))
-
-        TextField(
-            value = email.value,
-            onValueChange = { email.value = it },
-            label = { Text("Email") },
-            modifier = Modifier.fillMaxWidth()
+        MainHeader(navController,
+            text = "Sign up",
+            modifier = Modifier
+                .padding(12.dp)
+                .align(Alignment.Start),
         )
-        Spacer(modifier = Modifier.height(8.dp))
-
-        TextField(
-            value = password.value,
-            onValueChange = { password.value = it },
-            label = { Text("Password") },
-            modifier = Modifier.fillMaxWidth(),
-            visualTransformation = PasswordVisualTransformation()
+        Spacer(modifier = Modifier.height(2.dp))
+        Text(
+            text = "Create account",
+            modifier = Modifier
+                .padding(12.dp)
+                .align(Alignment.Start),
+            style = TextStyle(
+                color = MaterialTheme.colorScheme.secondary,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Normal,
+                letterSpacing = 0.4.sp
+            )
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        CustomTextField(
+            value = authViewModel.email.value,
+            onValueChange = authViewModel::onEmailChange,
+            label = "Email",
+        )
+        Spacer(modifier = Modifier.height(2.dp))
 
-        TextField(
-            value = confirmPassword.value,
-            onValueChange = { confirmPassword.value = it },
-            label = { Text("Confirm Password") },
-            modifier = Modifier.fillMaxWidth(),
-            visualTransformation = PasswordVisualTransformation()
+        CustomTextField(
+            value = authViewModel.password.value,
+            onValueChange = authViewModel::onPasswordChange,
+            label = "Password",
+            isPassword = true,
+        )
+        Spacer(modifier = Modifier.height(2.dp))
+
+        CustomTextField(
+            value = authViewModel.confirmPassword.value,
+            onValueChange = authViewModel::onConfirmPasswordChange,
+            label = "Confirm Password",
+            isPassword = true
         )
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(
+        OnBoardingButton(
+            text = "Register",
             onClick = {
-                if (password.value == confirmPassword.value) {
-                    // Здесь создаем нового пользователя через Firebase
-                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.value, password.value)
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                // Если регистрация успешна
-                                authViewModel.isAuthenticated.value = true
-                                Toast.makeText(context, "Registration successful", Toast.LENGTH_SHORT).show()
-                                navController.navigate("home") // Переходим на главный экран
-                            } else {
-                                // Если произошла ошибка
-                                Toast.makeText(context, "Registration failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                } else {
-                    Toast.makeText(context, "Passwords do not match", Toast.LENGTH_SHORT).show()
-                }
+                // сalling register method from AuthViewModel
+                authViewModel.register(
+                    onSuccess = {
+                        // if success
+                        Toast.makeText(context, "Registration successful", Toast.LENGTH_SHORT).show()
+                        navController.navigate("home")  // go home
+                    },
+                    onFailure = { errorMessage ->
+                        // if registration fails
+                        Toast.makeText(context, "Registration failed: $errorMessage", Toast.LENGTH_SHORT).show()
+                    }
+                )
             },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Register")
+            backgroundColor = MaterialTheme.colorScheme.primary,
+            textColor = MaterialTheme.colorScheme.onSecondary
+        )
+        // display validation error message if any
+        validationError?.let {
+            Text(
+                text = it,
+                style = TextStyle(color = MaterialTheme.colorScheme.error),
+                modifier = Modifier.padding(top = 16.dp)
+            )
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
+        // Navigation to login screen
         TextButton(
             onClick = { navController.navigate("login") }
         ) {
-            Text("Already have an account? Login")
+            Text("Already have an account? Login",
+                style = TextStyle(
+                    color = MaterialTheme.colorScheme.primary,
+                    fontSize = 18.sp,
+                    letterSpacing = 0.4.sp,
+                    fontWeight = FontWeight.SemiBold)
+            )
+        }
+        Spacer(modifier = Modifier.height(60.dp))
+
+      Column(
+          modifier = Modifier.fillMaxSize().padding(16.dp),
+          verticalArrangement = Arrangement.Top,
+          horizontalAlignment = Alignment.CenterHorizontally
+
+        ) {
+            Text(
+                text = "By clicking Register, you agree to our",
+                style = TextStyle(
+                    color = MaterialTheme.colorScheme.onBackground,
+                    fontSize = 18.sp,
+                    letterSpacing = 0.3.sp
+                )
+            )
+            TextButton(onClick = { navController.navigate("register") }) {
+                Text("Terms, Data Policy.",
+                    style = TextStyle(
+                        color = MaterialTheme.colorScheme.primary,
+                        fontSize = 18.sp,
+                        letterSpacing = 0.3.sp
+                    )
+                )
+            }
         }
     }
 }
