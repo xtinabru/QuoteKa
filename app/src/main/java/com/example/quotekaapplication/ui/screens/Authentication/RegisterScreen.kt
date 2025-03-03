@@ -11,6 +11,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.quotekaapplication.ui.screens.Authentication.Login.BackButton
+import com.example.quotekaapplication.ui.screens.Authentication.MainHeader
+
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
@@ -21,12 +24,15 @@ fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel) {
     val context = LocalContext.current
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.fillMaxSize().padding(16.dp),
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        BackButton(navController)
+        Spacer(modifier = Modifier.height(32.dp))
+        MainHeader(navController, text = "Welcome to the New Screen!")
+        Spacer(modifier = Modifier.height(8.dp))
+
         TextField(
             value = email.value,
             onValueChange = { email.value = it },

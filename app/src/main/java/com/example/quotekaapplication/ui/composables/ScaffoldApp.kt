@@ -12,7 +12,7 @@ import com.example.quotekaapplication.ui.composables.BottomAppBar.BottomBar
 import com.example.quotekaapplication.ui.screens.AddQuoteScreen
 import com.example.quotekaapplication.ui.screens.CategoriesScreen
 import com.example.quotekaapplication.ui.screens.FavoriteScreen
-import com.example.quotekaapplication.ui.screens.Authentication.Login.LoginScreen
+import com.example.quotekaapplication.ui.screens.Authentication.LoginScreen
 import com.example.quotekaapplication.ui.screens.MainScreen
 import com.example.quotekaapplication.ui.screens.OnBoardingScreen.OnBoardingScreen
 

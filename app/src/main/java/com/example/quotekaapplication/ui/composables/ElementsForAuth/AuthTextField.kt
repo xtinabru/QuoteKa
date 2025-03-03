@@ -27,8 +27,7 @@ fun CustomTextField(
     modifier: Modifier = Modifier,
 ) {
    Box(
-        modifier = modifier
-            .fillMaxWidth(),
+       modifier = Modifier.fillMaxWidth().padding(4.dp),
 
     ) {
         OutlinedTextField(
