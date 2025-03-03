@@ -6,14 +6,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.quotekaapplication.ui.composables.ElementsForAuth.CustomTextField
 
 @Composable
 fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
@@ -22,11 +20,7 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
     ) {
         BackButton(navController)
         Spacer(modifier = Modifier.height(32.dp))
-
-        Text(
-            text = "Welcome Back \uD83D\uDC4B\uD83C\uDFFB",
-            style = MaterialTheme.typography.headlineLarge
-        )
+        WelcomeBackTitle(navController)
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
@@ -35,30 +29,28 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
         )
         Spacer(modifier = Modifier.height(32.dp))
 
-        TextField(
-            value = email,
-            onValueChange = { email = it },
-            label = { Text("Email") },
-            modifier = Modifier.fillMaxWidth()
+        CustomTextField(
+            value = authViewModel.email.value,
+            onValueChange = authViewModel::onEmailChange,
+            label = "Email"
         )
         Spacer(modifier = Modifier.height(16.dp))
 
-        TextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Password") },
-            visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier.fillMaxWidth()
+        CustomTextField(
+            value = authViewModel.password.value,
+            onValueChange = authViewModel::onPasswordChange,
+            label = "Password",
+            isPassword = true
         )
         Spacer(modifier = Modifier.height(16.dp))
 
 
-        TextButton(onClick = { /* Навигация на экран восстановления пароля */ }) {
+        TextButton(onClick = { /* logic */ }) {
             Text("Forgot Password?")
         }
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(onClick = { authViewModel.login(email, password) }, modifier = Modifier.fillMaxWidth()) {
+        Button(onClick = { authViewModel.login() }, modifier = Modifier.fillMaxWidth()) {
             Text("Sign in")
         }
         Spacer(modifier = Modifier.height(16.dp))
@@ -74,7 +66,7 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
         }
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(onClick = { /* Логика для входа через Google */ }, modifier = Modifier.fillMaxWidth()) {
+        Button(onClick = { /* logic maybe one day */ }, modifier = Modifier.fillMaxWidth()) {
             Text("Sign in with Google")
         }
     }
