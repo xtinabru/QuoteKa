@@ -25,14 +25,16 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
 
         Text(
             text = "Sign in to your account",
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyLarge
         )
         Spacer(modifier = Modifier.height(32.dp))
 
         CustomTextField(
             value = authViewModel.email.value,
             onValueChange = authViewModel::onEmailChange,
-            label = "Email"
+            label = "Email",
+
+
         )
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -60,6 +62,7 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
             horizontalArrangement = Arrangement.Center
         ) {
             Text("Don't have an account? ")
+
             TextButton(onClick = { navController.navigate("register") }) {
                 Text("Register")
             }
