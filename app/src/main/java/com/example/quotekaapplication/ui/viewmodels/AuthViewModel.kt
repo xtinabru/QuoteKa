@@ -13,57 +13,62 @@ class AuthViewModel : ViewModel() {
     var email = mutableStateOf("")
     var password = mutableStateOf("")
     var confirmPassword = mutableStateOf("")
-
     var isAuthenticated = mutableStateOf(false)
 
     // validation error
     var validationError = mutableStateOf<String?>(null)
 
+
+    // inputs
     fun onEmailChange(newEmail: String) {
         email.value = newEmail
     }
-
     fun onPasswordChange(newPassword: String) {
         password.value = newPassword
     }
-
     fun onConfirmPasswordChange(newConfirmPassword: String) {
         confirmPassword.value = newConfirmPassword
     }
 
-    // Проверка на валидность email
+    // email validaition!
     private fun isEmailValid(): Boolean {
         val emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"
         return Pattern.matches(emailPattern, email.value)
     }
 
-    // Проверка на валидность пароля
+    // password validation
     private fun isPasswordValid(): Boolean {
         val passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%^&*(),.?\":{}|<>]).{8,}$"
         return Pattern.matches(passwordPattern, password.value)
     }
 
-    // Проверка совпадения паролей
+    // check that they match
     private fun arePasswordsMatching(): Boolean {
         return password.value == confirmPassword.value
     }
 
-    // Проверка всех условий
+    // all conditions check
     fun validateInputs(): Boolean {
         return isEmailValid() && isPasswordValid() && arePasswordsMatching()
     }
 
-    // Функция регистрации
+    // REGISTRATION
     fun register(onSuccess: () -> Unit, onFailure: (String) -> Unit) {
         if (validateInputs()) {
             auth.createUserWithEmailAndPassword(email.value, password.value)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         isAuthenticated.value = true
-                        onSuccess()  // Регистрация успешна
+                        onSuccess()
                     } else {
+                        // check if email exists
+                        task.exception?.let { exception ->
+                            if (exception.message?.contains("The email address is already in use") == true) {
+                                validationError.value = "Email is already in use"
+                            }
+                        }
                         task.exception?.message?.let {
-                            onFailure(it)  // Ошибка
+                            onFailure(it)  // error
                         }
                     }
                 }
@@ -78,13 +83,22 @@ class AuthViewModel : ViewModel() {
         }
     }
 
-    fun login() {
+    // LOGIN
+    fun login(onSuccess: () -> Unit, onFailure: (String) -> Unit) {
         auth.signInWithEmailAndPassword(email.value, password.value)
             .addOnCompleteListener { task ->
-                isAuthenticated.value = task.isSuccessful
+                if (task.isSuccessful) {
+                    isAuthenticated.value = true
+                    onSuccess()
+                } else {
+                    task.exception?.message?.let {
+                        onFailure(it)
+                    }
+                }
             }
     }
 
+    //LOGOUT
     fun logout() {
         auth.signOut()
         isAuthenticated.value = false

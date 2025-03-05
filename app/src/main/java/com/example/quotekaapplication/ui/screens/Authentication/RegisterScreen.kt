@@ -77,15 +77,15 @@ fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel) {
         OnBoardingButton(
             text = "Register",
             onClick = {
-                // сalling register method from AuthViewModel
+                // Calling register method from AuthViewModel
                 authViewModel.register(
                     onSuccess = {
-                        // if success
+                        // If success
                         Toast.makeText(context, "Registration successful", Toast.LENGTH_SHORT).show()
-                        navController.navigate("home")  // go home
+                        navController.navigate("home")  // Go home
                     },
                     onFailure = { errorMessage ->
-                        // if registration fails
+                        // If registration fails
                         Toast.makeText(context, "Registration failed: $errorMessage", Toast.LENGTH_SHORT).show()
                     }
                 )
@@ -93,7 +93,8 @@ fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel) {
             backgroundColor = MaterialTheme.colorScheme.primary,
             textColor = MaterialTheme.colorScheme.onSecondary
         )
-        // display validation error message if any
+
+        // Display validation error message if any
         validationError?.let {
             Text(
                 text = it,
@@ -118,11 +119,10 @@ fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel) {
         }
         Spacer(modifier = Modifier.height(60.dp))
 
-      Column(
-          modifier = Modifier.fillMaxSize().padding(16.dp),
-          verticalArrangement = Arrangement.Top,
-          horizontalAlignment = Alignment.CenterHorizontally
-
+        Column(
+            modifier = Modifier.fillMaxSize().padding(16.dp),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = "By clicking Register, you agree to our",

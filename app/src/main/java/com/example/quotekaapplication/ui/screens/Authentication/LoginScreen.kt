@@ -23,20 +23,6 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
     // Track the validation error message
     var errorMessage by remember { mutableStateOf("") }
 
-    // Handling registration logic with validation
-    val handleRegister = {
-        authViewModel.register(
-            onSuccess = {
-                // Navigate to home screen if registration is successful
-                navController.navigate("home")
-            },
-            onFailure = { error ->
-                // Display validation error message if validation fails
-                errorMessage = error
-            }
-        )
-    }
-
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.Top,
@@ -108,11 +94,22 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
 
         OnBoardingButton(
             text = "Login",
-            onClick = handleRegister,  // Use the handleRegister function to validate before navigating
+            onClick = {
+                authViewModel.login(
+                    onSuccess = {
+                        navController.navigate("home")
+                    },
+                    onFailure = { error ->
+                        errorMessage = error
+                    }
+                )
+            },
             backgroundColor = MaterialTheme.colorScheme.primary,
             textColor = MaterialTheme.colorScheme.onSecondary
         )
+
         Spacer(modifier = Modifier.height(18.dp))
+
         OnBoardingButton(
             text = "Sign in with Google",
             onClick = { /* logic */ },
