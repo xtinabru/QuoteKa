@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,7 +16,7 @@ val navItems = bottomNavItems
 fun BottomBar(navController: NavController) {
     BottomAppBar(
         modifier = Modifier.fillMaxWidth(),
-        containerColor = Color.Green,
+        containerColor = MaterialTheme.colorScheme.primaryContainer,
         actions = {
             Row(
                 modifier = Modifier.fillMaxWidth(),
