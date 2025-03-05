@@ -4,45 +4,34 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
-import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.quotekaapplication.ui.composables.BottomAppBar.BottomNavItemData
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.quotekaapplication.ui.viewmodels.BottomBarViewModel
 
 @Composable
 fun BottomNavItem(
     navController: NavController,
     item: BottomNavItemData
 ) {
-    // Get the current screen
-    val navBackStackEntry = navController.currentBackStackEntryAsState()
+    // get ViewModel inside Composable
+    val viewModel: BottomBarViewModel = viewModel()
 
-    // Check if the current route matches the item's route to determine if it's active
-    val isActive = navBackStackEntry.value?.destination?.route == item.route
+    // get the curr route ViewModel
+    val currentRoute = viewModel.currentRoute
+    val isActive = currentRoute == item.route
 
-    val iconTint = if (isActive) Color.Blue else Color.White // Active - Blue, Inactive - White
+    val iconTint = if (isActive) Color.Blue else Color.White
 
     IconButton(
         onClick = {
-            if (navBackStackEntry.value?.destination?.route != item.route) { // Check in case not to go the same route
-                navController.navigate(item.route) {
-                    // Optionally use a popUpTo to clear back stack when needed
-                    // popUpTo(navController.graph.startDestinationId) { inclusive = true }
-                }
-            }
+            // firstly - send the route to ViewModel , then navigation
+            viewModel.onNavItemClicked(navController, item.route)
         }
     ) {
         Icon(
             imageVector = item.icon,
             contentDescription = item.contentDescription,
-            tint = iconTint // Apply the color based on the active state
+            tint = iconTint
         )
     }
 }
-
-data class BottomNavItemData(
-    val route: String,
-    val icon: ImageVector,
-    val contentDescription: String,
-
-    )

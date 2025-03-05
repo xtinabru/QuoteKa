@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 
-
+val navItems = bottomNavItems
 @Composable
 fun BottomBar(navController: NavController) {
     BottomAppBar(
@@ -22,8 +22,10 @@ fun BottomBar(navController: NavController) {
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                bottomNavItems.forEach { item ->
-                    BottomNavItem(navController, item)
+                navItems.forEach { item ->
+                    BottomNavItem(
+                        navController = navController,
+                        item = item)
                 }
             }
         }
