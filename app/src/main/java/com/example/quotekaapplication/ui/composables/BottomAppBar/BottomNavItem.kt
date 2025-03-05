@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.quotekaapplication.ui.theme.Purple
+import com.example.quotekaapplication.ui.theme.BlackFonts
 import com.example.quotekaapplication.ui.viewmodels.BottomBarViewModel
 
 @Composable
@@ -21,7 +21,7 @@ fun BottomNavItem(
     val currentRoute = viewModel.currentRoute
     val isActive = currentRoute == item.route
 
-    val iconTint = if (isActive) Purple else Color.White
+    val iconTint = if (isActive) BlackFonts else Color.White
 
     IconButton(
         onClick = {

@@ -1,9 +1,12 @@
     package com.example.quotekaapplication.ui.composables.TopAppBar
 
+    import androidx.compose.foundation.layout.fillMaxWidth
     import androidx.compose.material3.DropdownMenu
     import androidx.compose.material3.DropdownMenuItem
+    import androidx.compose.material3.MaterialTheme
     import androidx.compose.material3.Text
     import androidx.compose.runtime.Composable
+    import androidx.compose.ui.Modifier
 
     // This displays a dropdown menu with three items: "Info", "Settings", and "Logout".
     // The menu opens or closes based on the value of the 'expanded' parameter.
@@ -25,7 +28,9 @@
 
         DropdownMenu(
             expanded = expanded,
-            onDismissRequest = onDismissRequest
+            onDismissRequest = onDismissRequest,
+            modifier = Modifier,
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
         ) {
             menuItems.forEach { (label, onClick) ->
                 DropdownMenuItem(

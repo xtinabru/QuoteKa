@@ -53,10 +53,9 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.navigation.compose)
-    implementation (libs.navigation.compose)
     implementation (libs.androidx.foundation)
     implementation (libs.firebase.ui.auth)
-
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.7.8")
     implementation(libs.material)
     implementation (libs.accompanist.systemuicontroller)
     testImplementation(libs.junit)
