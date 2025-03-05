@@ -1,5 +1,6 @@
 package com.example.quotekaapplication.ui.composables.BottomAppBar
 
+import BottomBarViewModel
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
@@ -7,7 +8,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.quotekaapplication.ui.theme.BlackFonts
-import com.example.quotekaapplication.ui.viewmodels.BottomBarViewModel
+
 
 @Composable
 fun BottomNavItem(

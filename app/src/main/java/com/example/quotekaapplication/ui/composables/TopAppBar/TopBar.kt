@@ -28,13 +28,14 @@ import com.example.quotekaapplication.ui.composables.TopAppBar.DropdownMenuCompo
 import com.example.quotekaapplication.ui.composables.TopAppBar.LogoutConfirmationDialog
 import com.example.quotekaapplication.ui.viewmodels.AuthViewModel
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBarComponent(
-    title: String,
     navController: NavController,
     authViewModel: AuthViewModel,
-    currentRoute: String
+    currentRoute: String,
+    bottomBarViewModel: BottomBarViewModel,
 ) {
 
     val logoImagePainter = painterResource(id = R.drawable.logo)
@@ -46,8 +47,9 @@ fun TopAppBarComponent(
         "categories" -> "Categories"
         "add_quote" -> "Add Quote"
         "favorite" -> "Favorites"
-        "settings" -> "Settings"
         "profile" -> "Profile"
+        "settings" -> "Settings"
+        "info" -> "Info"
         else -> "QuoteKa" // default
     }
 
@@ -94,10 +96,12 @@ fun TopAppBarComponent(
                 onDismissRequest = { expanded = false },
                 onInfoClick = {
                     expanded = false
+                    bottomBarViewModel.currentRoute = "info"
                     navController.navigate("info")
                 },
                 onSettingsClick = {
                     expanded = false
+                    bottomBarViewModel.currentRoute = "settings"
                     navController.navigate("settings")
                 },
                 onLogoutClick = {

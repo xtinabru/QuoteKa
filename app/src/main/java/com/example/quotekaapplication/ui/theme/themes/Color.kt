@@ -12,4 +12,4 @@ val BackgroundDark = Color(0xFF10052F)
 
 // Дополнительные цвета
 val AdditionalColor = Color(0xFFCCC2DC)
-val BlackFonts = Color(0xFF151515)
+val BlackFonts = Color(0xFF3B0958)
