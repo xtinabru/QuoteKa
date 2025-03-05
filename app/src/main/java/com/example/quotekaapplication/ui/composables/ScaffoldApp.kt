@@ -21,6 +21,7 @@ import com.example.quotekaapplication.ui.screens.QuoteInfo
 import com.example.quotekaapplication.ui.screens.RegisterScreen
 import com.example.quotekaapplication.ui.screens.SettingsScreen
 import com.example.quotekaapplication.ui.viewmodels.AuthViewModel
+import com.example.quotekaapplication.ui.viewmodels.BottomBarViewModel
 import com.example.quotekaapplication.ui.viewmodels.OnBoardingViewModel
 
 @Composable
@@ -28,15 +29,21 @@ fun ScaffoldApp() {
     val navController = rememberNavController()
 
     val authViewModel: AuthViewModel = viewModel()
+
+    // to get exemp of ViewModel
+    val bottomBarViewModel: BottomBarViewModel = viewModel()
+    val currentRoute = bottomBarViewModel.currentRoute
+
     val isAuthenticated = authViewModel.isAuthenticated.value
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
 
             if (isAuthenticated) { // show if is logged in
-                TopAppBarComponent(title = "Main Screen",
+                TopAppBarComponent(title = "QuoteKa",
                     navController = navController,
-                    authViewModel = authViewModel )
+                    authViewModel = authViewModel,
+                    currentRoute = currentRoute)
             }
         },
         content = { paddingValues -> // paddings btwn elements

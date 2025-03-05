@@ -1,3 +1,5 @@
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -12,6 +14,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.quotekaapplication.ui.composables.TopAppBar.DropdownMenuComponent
 import com.example.quotekaapplication.ui.composables.TopAppBar.LogoutConfirmationDialog
@@ -22,10 +26,22 @@ import com.example.quotekaapplication.ui.viewmodels.AuthViewModel
 fun TopAppBarComponent(
     title: String,
     navController: NavController,
-    authViewModel: AuthViewModel
+    authViewModel: AuthViewModel,
+    currentRoute: String
 ) {
     var expanded by remember { mutableStateOf(false) }
     var showLogoutConfirmation by remember { mutableStateOf(false) }
+
+    val title = when (currentRoute) {
+        "home" -> "Home"
+        "categories" -> "Categories"
+        "add_quote" -> "Add Quote"
+        "favorite" -> "Favorites"
+        "settings" -> "Settings"
+        "profile" -> "Profile"
+        else -> "QuoteKa" // default
+    }
+
 
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
@@ -33,7 +49,13 @@ fun TopAppBarComponent(
             titleContentColor = MaterialTheme.colorScheme.tertiary,
         ),
         title = {
-            Text(text = title)
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    text = title,
+                    modifier = Modifier.align(Alignment.Center),
+                    style = MaterialTheme.typography.titleLarge
+                )
+            }
         },
         actions = {
             IconButton(onClick = { expanded = !expanded }) {
