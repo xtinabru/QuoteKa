@@ -22,11 +22,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.quotekaapplication.R
 import com.example.quotekaapplication.ui.composables.TopAppBar.DropdownMenuComponent
 import com.example.quotekaapplication.ui.composables.TopAppBar.LogoutConfirmationDialog
 import com.example.quotekaapplication.ui.viewmodels.AuthViewModel
+import com.example.quotekaapplication.ui.viewmodels.TopAppBarViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,23 +38,12 @@ fun TopAppBarComponent(
     authViewModel: AuthViewModel,
     currentRoute: String,
     bottomBarViewModel: BottomBarViewModel,
+    topAppBarViewModel: TopAppBarViewModel = viewModel()
 ) {
 
     val logoImagePainter = painterResource(id = R.drawable.logo)
-    var expanded by remember { mutableStateOf(false) }
-    var showLogoutConfirmation by remember { mutableStateOf(false) }
 
-    val title = when (currentRoute) {
-        "home" -> "Home"
-        "categories" -> "Categories"
-        "add_quote" -> "Add Quote"
-        "favorite" -> "Favorites"
-        "profile" -> "Profile"
-        "settings" -> "Settings"
-        "info" -> "Info"
-        else -> "QuoteKa" // default
-    }
-
+    topAppBarViewModel.updateTitle(currentRoute)
 
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
@@ -77,7 +68,7 @@ fun TopAppBarComponent(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = title,
+                    text = topAppBarViewModel.title.value,
                     style = MaterialTheme.typography.titleLarge.copy(
                         color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
@@ -85,41 +76,41 @@ fun TopAppBarComponent(
             }
         },
         actions = {
-            IconButton(onClick = { expanded = !expanded }) {
+            IconButton(onClick = { topAppBarViewModel.expanded.value = !topAppBarViewModel.expanded.value }) {
                 Icon(
                     imageVector = Icons.Filled.MoreVert,
                     contentDescription = "Open submenu"
                 )
             }
             DropdownMenuComponent(
-                expanded = expanded,
-                onDismissRequest = { expanded = false },
+                expanded = topAppBarViewModel.expanded.value,
+                onDismissRequest = { topAppBarViewModel.expanded.value = false },
                 onInfoClick = {
-                    expanded = false
+                    topAppBarViewModel.expanded.value = false
                     bottomBarViewModel.currentRoute = "info"
                     navController.navigate("info")
                 },
                 onSettingsClick = {
-                    expanded = false
+                    topAppBarViewModel.expanded.value = false
                     bottomBarViewModel.currentRoute = "settings"
                     navController.navigate("settings")
                 },
                 onLogoutClick = {
-                    expanded = false
-                    showLogoutConfirmation = true
+                    topAppBarViewModel.expanded.value = false
+                    topAppBarViewModel.showLogoutConfirmation.value = true
                 }
             )
         }
     )
 
-    if (showLogoutConfirmation) {
+    if (topAppBarViewModel.showLogoutConfirmation.value) {
         LogoutConfirmationDialog(
-            onDismissRequest = { showLogoutConfirmation = false },
+            onDismissRequest = { topAppBarViewModel.showLogoutConfirmation.value = false },
             onConfirmLogout = {
                 authViewModel.logout()
                 navController.navigate("onboarding")
             },
-            onCancelLogout = { showLogoutConfirmation = false }
+            onCancelLogout = { topAppBarViewModel.showLogoutConfirmation.value = false }
         )
     }
 }
