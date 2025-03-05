@@ -19,6 +19,20 @@ class AuthViewModel : ViewModel() {
     var validationError = mutableStateOf<String?>(null)
 
 
+  // ________________________________________
+        // TO STAY LOGGED IN WHEN REFRESH
+    // Check if the user is already logged in
+    init {
+        // This will check if the user is logged in when the ViewModel is created
+        checkUserAuthenticationStatus()
+    }
+
+    private fun checkUserAuthenticationStatus() {
+        val currentUser = auth.currentUser
+        isAuthenticated.value = currentUser != null
+    }
+ // _________________________________________________
+
     // inputs
     fun onEmailChange(newEmail: String) {
         email.value = newEmail
