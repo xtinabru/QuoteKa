@@ -1,4 +1,4 @@
-package com.example.quotekaapplication.ui.models
+package com.example.quotekaapplication.data.models
 
 // this is the model (what is inside each slide)
 data class OnBoardingData(

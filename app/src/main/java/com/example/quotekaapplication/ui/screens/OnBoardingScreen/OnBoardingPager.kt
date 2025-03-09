@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.quotekaapplication.ui.models.OnBoardingData
+import com.example.quotekaapplication.data.models.OnBoardingData
 
 @Composable
 fun OnBoardingPager(

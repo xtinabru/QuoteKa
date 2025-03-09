@@ -5,7 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.quotekaapplication.R
-import com.example.quotekaapplication.ui.models.OnBoardingData
+import com.example.quotekaapplication.data.models.OnBoardingData
 
 class OnBoardingViewModel : ViewModel() {
 
