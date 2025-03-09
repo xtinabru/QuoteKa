@@ -58,6 +58,12 @@ dependencies {
     implementation("androidx.compose.ui:ui-text-google-fonts:1.7.8")
     implementation(libs.material)
     implementation (libs.accompanist.systemuicontroller)
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.2'
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

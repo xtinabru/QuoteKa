@@ -12,7 +12,7 @@ import com.example.quotekaapplication.ui.screens.AddQuoteScreen
 import com.example.quotekaapplication.ui.screens.CategoriesScreen
 import com.example.quotekaapplication.ui.screens.FavoriteScreen
 import com.example.quotekaapplication.ui.screens.Authentication.LoginScreen
-import com.example.quotekaapplication.ui.screens.MainScreen
+import com.example.quotekaapplication.ui.screens.HomeScreen
 import com.example.quotekaapplication.ui.screens.OnBoardingScreen.OnBoardingScreen
 import com.example.quotekaapplication.ui.screens.ProfileScreen
 import com.example.quotekaapplication.ui.screens.QuoteInfo
@@ -48,7 +48,7 @@ fun ScaffoldApp() {
                 startDestination = if (isAuthenticated) "home" else "onBoarding",
                 modifier = Modifier.padding(paddingValues)
             ) {
-                composable(route = "home")  { MainScreen(navController, paddingValues) }
+                composable(route = "home")  { HomeScreen(navController, paddingValues) }
                 composable("categories") { CategoriesScreen() }
                 composable("add_quote") { AddQuoteScreen() }
                 composable(route = "info")  { QuoteInfo(navController, paddingValues) }

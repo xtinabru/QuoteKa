@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
-fun MainScreen(navController: NavController, paddingValues: PaddingValues) {
+fun HomeScreen(navController: NavController, paddingValues: PaddingValues) {
     Column(modifier = Modifier
         .padding(16.dp)
         .padding(top = paddingValues.calculateTopPadding())
