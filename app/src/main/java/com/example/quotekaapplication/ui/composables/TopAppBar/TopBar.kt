@@ -56,14 +56,15 @@ fun TopAppBarComponent(
                 painter = logoImagePainter,
                 contentDescription = "Logo",
                 modifier = Modifier
-                    .size(120.dp)
-                    .padding(end = 20.dp)
+                    .size(60.dp)
+                    .padding(start = 10.dp),
+
             )
         },
         title = {
             Row(
                 modifier = Modifier.fillMaxWidth()
-                    .padding(start = 20.dp),
+                    .padding(start = 80.dp),
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
