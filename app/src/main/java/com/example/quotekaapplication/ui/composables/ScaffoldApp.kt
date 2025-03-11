@@ -48,7 +48,7 @@ fun ScaffoldApp() {
                 startDestination = if (isAuthenticated) "home" else "onBoarding",
                 modifier = Modifier.padding(paddingValues)
             ) {
-                composable(route = "home")  { HomeScreen(navController, paddingValues) }
+                composable(route = "home")  { HomeScreen( paddingValues) }
                 composable("categories") { CategoriesScreen() }
                 composable("add_quote") { AddQuoteScreen() }
                 composable(route = "info")  { QuoteInfo(navController, paddingValues) }
