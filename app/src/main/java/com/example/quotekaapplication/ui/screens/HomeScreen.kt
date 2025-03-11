@@ -2,79 +2,105 @@ package com.example.quotekaapplication.ui.screens
 
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.quotekaapplication.ui.viewmodels.QuoteViewModel
-import androidx.compose.ui.graphics.Color
-import androidx.compose.foundation.background
 import androidx.navigation.NavController
+import com.example.quotekaapplication.R
+import com.example.quotekaapplication.ui.theme.BlackFonts
+import com.example.quotekaapplication.ui.theme.Purple
 
 @Composable
 fun HomeScreen(navController: NavController, paddingValues: PaddingValues) {
-    // Получаем ViewModel
     val quoteViewModel: QuoteViewModel = viewModel()
-
-    // Получаем данные из State
     val quote = quoteViewModel.quoteOfTheDay.value
     val errorMessage = quoteViewModel.errorMessage.value
 
-    // Запрос цитаты при первом рендере экрана
     LaunchedEffect(Unit) {
         quoteViewModel.getQuoteOfTheDay()
     }
 
-    // Получаем текущий контекст
     val context = LocalContext.current
 
-    Column(
-        modifier = Modifier
-            .padding(20.dp)
-            .padding(top = paddingValues.calculateTopPadding())
-
+    Box(
+        modifier = Modifier.fillMaxSize()
     ) {
 
-        Text(
-            text = "Quote of the day:",
-            style = MaterialTheme.typography.titleLarge
+        Image(
+            painter = painterResource(id = R.drawable.background_image),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxSize()
+                .graphicsLayer(alpha = 0.4f)
         )
-        Spacer(modifier = Modifier.height(8.dp)) // Отступ между строками
-        Text(
-            text = quote?.quote ?: "Loading...",
-            style = MaterialTheme.typography.bodyLarge
-        )
-        Spacer(modifier = Modifier.height(20.dp))
-        Text("By: ${quote?.author}", style = MaterialTheme.typography.bodyMedium)
-        Log.i("HomeScreen", "Quote of the day: ${quote?.quote}")
 
-        // Показать сообщение об ошибке, если оно есть
-        errorMessage?.let {
-            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-        }
+        Column(
+            modifier = Modifier
+                .padding(20.dp)
+                .padding(top = paddingValues.calculateTopPadding())
+        ) {
+            Text(
+                text = "Quote of the day:",
+                style = MaterialTheme.typography.titleLarge.copy(
+                    fontSize = 30.sp
+                ),
+                color = MaterialTheme.colorScheme.onBackground
+            )
+            Spacer(modifier = Modifier.height(40.dp))
+            Text(
+                text = quote?.quote ?: "Loading...",
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    fontSize = 26.sp,
+                    lineHeight = 36.sp,
+                ),
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .verticalScroll(rememberScrollState()),
 
-        // Показать цитату, если она есть
-//        quote?.let {
-//            Text("Quote of the day: ${it.quote}", style = MaterialTheme.typography.bodyMedium) // Используем content
-//            Spacer(modifier = Modifier.height(10.dp))
-//            Text("By: ${it.author}", style = MaterialTheme.typography.bodyMedium)  // Используем author
-//        }
+                textAlign = TextAlign.Justify
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = "By: ${quote?.author}",
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    fontSize = 30.sp,
+                    lineHeight = 36.sp,
 
-        Spacer(modifier = Modifier.height(20.dp))
+                ),
+                color = MaterialTheme.colorScheme.onBackground
+            )
 
-        // Кнопка для перехода на экран подробностей цитаты
-        Button(onClick = { navController.navigate("info") }) {
-            Text("More details")
+            Log.i("HomeScreen", "Quote of the day: ${quote?.quote}")
+
+            errorMessage?.let {
+                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
+

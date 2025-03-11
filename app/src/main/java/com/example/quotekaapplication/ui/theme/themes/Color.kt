@@ -3,7 +3,7 @@ package com.example.quotekaapplication.ui.theme
 import androidx.compose.ui.graphics.Color
 
 // Main colors
-val Purple = Color(0xFF54408C)
+val Purple = Color(0xFF7D63CB)
 val Grey = Color(0xFF6F6E6E)
 
 // Backgrnds
