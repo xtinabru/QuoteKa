@@ -13,23 +13,22 @@ class QuoteViewModel : ViewModel() {
 
     private val repository = QuoteRepository()
 
-    // Используем обычные переменные состояния для хранения данных
+    //  Use ordinary state vars to collect data
     private val _quoteOfTheDay = mutableStateOf<Quote?>(null)
     val quoteOfTheDay: State<Quote?> = _quoteOfTheDay
 
     private val _errorMessage = mutableStateOf<String?>(null)
     val errorMessage: State<String?> = _errorMessage
 
-    // Получение цитаты дня
     fun getQuoteOfTheDay() {
         viewModelScope.launch {
             try {
-                // Получаем список цитат через репозиторий
+                // get the list of quotes through the repository
                 val quotes = repository.getQuoteOfTheDay()
 
-                // Если список не пустой, присваиваем первую цитату
+                // ЕIf the list of quotes is not empty, set the first quote as the quote of the day
                 if (quotes.isNotEmpty()) {
-                    _quoteOfTheDay.value = quotes[0] // Присваиваем первую цитату
+                    _quoteOfTheDay.value = quotes[0] // set the first quote as the quote of the day
 
                 } else {
                     _errorMessage.value = "No quotes found"

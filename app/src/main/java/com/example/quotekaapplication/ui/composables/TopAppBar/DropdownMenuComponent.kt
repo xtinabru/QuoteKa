@@ -1,6 +1,5 @@
     package com.example.quotekaapplication.ui.composables.TopAppBar
 
-    import androidx.compose.foundation.layout.fillMaxWidth
     import androidx.compose.material3.DropdownMenu
     import androidx.compose.material3.DropdownMenuItem
     import androidx.compose.material3.MaterialTheme
@@ -30,7 +29,7 @@
             expanded = expanded,
             onDismissRequest = onDismissRequest,
             modifier = Modifier,
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            containerColor = MaterialTheme.colorScheme.secondary,
         ) {
             menuItems.forEach { (label, onClick) ->
                 DropdownMenuItem(
