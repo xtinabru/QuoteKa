@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.example.quotekaapplication.ui.theme.Purple
 
 @Composable
-fun FavoriteButton(onClick: () -> Unit) {
+fun FavoriteButton(isFavorite: Boolean, onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -40,7 +40,7 @@ fun FavoriteButton(onClick: () -> Unit) {
                 Icon(
                     imageVector = Icons.Default.Favorite,
                     contentDescription = "Add to Favorites",
-                    tint = Purple,
+                    tint = if (isFavorite) Color.Red else Purple, // Цвет меняется на красный если цитата в избранном
                     modifier = Modifier.size(32.dp)
                 )
             }

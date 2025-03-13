@@ -1,16 +1,12 @@
 package com.example.quotekaapplication.ui.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,7 +20,7 @@ import com.example.quotekaapplication.R
 import com.example.quotekaapplication.ui.viewmodels.QuoteViewModel
 import com.example.quotekaapplication.ui.composables.DifferentElements.FavoriteButton
 import com.example.quotekaapplication.ui.viewmodels.FavoritesViewModel
-
+import androidx.compose.ui.platform.LocalContext
 
 @Composable
 fun HomeScreen(
@@ -35,7 +31,10 @@ fun HomeScreen(
     val quote = quoteViewModel.quoteOfTheDay.value
     val isLoading = quoteViewModel.isLoading.value
     val errorMessage = quoteViewModel.errorMessage.value
+    val isFavorite = quote != null && favoritesViewModel.favoriteQuotes.value.contains(quote)
 
+    // Получаем контекст для отображения Toast
+    val context = LocalContext.current
 
     Box(modifier = Modifier.fillMaxSize()) {
 
@@ -82,15 +81,23 @@ fun HomeScreen(
                     item { QuoteCard(quote) }
 
                     item {
-                        FavoriteButton {
-                            quote?.let { favoritesViewModel.addToFavorites(it) }
-                        }
+                        FavoriteButton(
+                            isFavorite = isFavorite, // Передаем isFavorite для изменения цвета кнопки
+                            onClick = {
+                                if (quote != null) {
+                                    if (isFavorite) {
+                                        favoritesViewModel.removeFromFavorites(quote)
+                                    } else {
+                                        favoritesViewModel.addToFavorites(quote)
+                                        // Показать всплывающее сообщение
+                                        Toast.makeText(context, "Quote added to Favorites!", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                            }
+                        )
                     }
                 }
             }
         }
     }
 }
-
-
-
