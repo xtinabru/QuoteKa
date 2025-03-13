@@ -13,8 +13,6 @@ import com.example.quotekaapplication.ui.composables.BottomAppBar.BottomNavItemD
 
 val bottomNavItems = listOf(
     BottomNavItemData("home", Icons.Filled.Home, "Home"),
-    BottomNavItemData("categories", Icons.Filled.FavoriteBorder, "Categories"),
-    BottomNavItemData("add_quote", Icons.Filled.AddCircle, "Add Quote"),
     BottomNavItemData("favorite", Icons.Filled.Favorite, "Favorite"),
     BottomNavItemData("profile", Icons.Filled.AccountCircle, "Profile")
 )

@@ -72,7 +72,7 @@ fun HomeScreen(
                 ) {
                     item {
                         Text(
-                            text = "Quote of the day:",
+                            text = "Quote of the day for you:",
                             style = MaterialTheme.typography.titleLarge.copy(fontSize = 30.sp),
                             color = MaterialTheme.colorScheme.onBackground
                         )

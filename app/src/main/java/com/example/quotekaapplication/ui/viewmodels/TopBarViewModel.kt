@@ -14,13 +14,11 @@ class TopAppBarViewModel : ViewModel() {
         currentRoute.value = route
         title.value = when (route) {
             "home" -> "Home"
-            "categories" -> "Categories"
-            "add_quote" -> "Add Quote"
             "favorite" -> "Favorites"
             "profile" -> "Profile"
             "settings" -> "Settings"
             "info" -> "Info"
-            else -> "QuoteKa"
+            else -> title.value
         }
     }
 }

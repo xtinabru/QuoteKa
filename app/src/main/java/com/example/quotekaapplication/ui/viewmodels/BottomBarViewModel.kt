@@ -5,11 +5,14 @@ import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
 
 class BottomBarViewModel : ViewModel() {
-    var currentRoute by mutableStateOf<String?>(null) // Убрали private _currentRoute чтбы можно было вносить изменения
+    var currentRoute by mutableStateOf<String>("home") // initial route as home
 
-
+    // nav
     fun onNavItemClicked(navController: NavController, route: String) {
         currentRoute = route
-        navController.navigate(route)
+        navController.navigate(route) {
+            launchSingleTop = true
+            restoreState = true
+        }
     }
 }
