@@ -8,14 +8,14 @@ class FavoritesViewModel : ViewModel() {
     private val _favoriteQuotes = mutableStateListOf<Quote>()
     val favoriteQuotes: List<Quote> get() = _favoriteQuotes
 
-    // add a quote to the list
     fun addToFavorites(quote: Quote) {
-        if (!_favoriteQuotes.contains(quote)) {
-            _favoriteQuotes.add(quote)
+        if (_favoriteQuotes.any { it.quote == quote.quote }) {
+            return // already in favourites
         }
+        _favoriteQuotes.add(quote)
     }
-    // delete the quote
+
     fun removeFromFavorites(quote: Quote) {
-        _favoriteQuotes.remove(quote)
+        _favoriteQuotes.removeAll { it.quote == quote.quote }
     }
 }

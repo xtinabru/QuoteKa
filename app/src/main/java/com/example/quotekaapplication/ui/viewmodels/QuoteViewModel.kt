@@ -20,8 +20,18 @@ class QuoteViewModel : ViewModel() {
     private val _errorMessage = mutableStateOf<String?>(null)
     val errorMessage: State<String?> = _errorMessage
 
+    private val _isLoading = mutableStateOf(false)
+    val isLoading: State<Boolean> = _isLoading
+
+    init {
+        getQuoteOfTheDay()
+    }
+
     fun getQuoteOfTheDay() {
         viewModelScope.launch {
+
+            _isLoading.value = true
+            _errorMessage.value = null // clean the error message
             try {
                 // get the list of quotes through the repository
                 val quotes = repository.getQuoteOfTheDay()
@@ -38,6 +48,8 @@ class QuoteViewModel : ViewModel() {
             } catch (e: Exception) {
                 _errorMessage.value = "Error while retrieving the data"
                 Log.e("QuoteViewModel", "Error fetching quote", e)
+            }finally {
+                _isLoading.value = false
             }
         }
     }

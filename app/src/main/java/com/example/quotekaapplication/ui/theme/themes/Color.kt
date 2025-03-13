@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.Color
 
 // Main colors
 val Purple = Color(0xFF7D63CB)
-val Grey = Color(0xFF6F6E6E)
+val Grey = Color(0xFF1F1F1F)
 
 // Backgrnds
 val BackgroundLight = Color(0xFFFFFFFF)

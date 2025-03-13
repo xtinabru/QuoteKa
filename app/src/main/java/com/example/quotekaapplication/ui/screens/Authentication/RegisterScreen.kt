@@ -13,7 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.quotekaapplication.ui.composables.ElementsForAuth.CustomTextField
+import com.example.quotekaapplication.ui.composables.DifferentElements.CustomTextField
 import com.example.quotekaapplication.ui.composables.onboarding.OnBoardingButton
 import com.example.quotekaapplication.ui.screens.Authentication.Login.BackButton
 import com.example.quotekaapplication.ui.screens.Authentication.MainHeader
