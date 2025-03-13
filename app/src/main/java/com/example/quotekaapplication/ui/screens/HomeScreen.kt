@@ -21,6 +21,7 @@ import com.example.quotekaapplication.ui.viewmodels.QuoteViewModel
 import com.example.quotekaapplication.ui.composables.DifferentElements.FavoriteButton
 import com.example.quotekaapplication.ui.viewmodels.FavoritesViewModel
 import androidx.compose.ui.platform.LocalContext
+import com.example.quotekaapplication.ui.composables.DifferentElements.LoadingOrErrorState // Импортируем наш новый компонент
 
 @Composable
 fun HomeScreen(
@@ -47,55 +48,42 @@ fun HomeScreen(
                 .graphicsLayer(alpha = 0.4f)
         )
 
-        when {
-            isLoading -> {
-                Text(
-                    text = "Loading...",
-                    modifier = Modifier.align(Alignment.Center),
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
-            errorMessage != null -> {
-                Text(
-                    text = errorMessage,
-                    modifier = Modifier.align(Alignment.Center),
-                    color = Color.Red,
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
-            else -> {
-                LazyColumn(
-                    modifier = Modifier
-                        .padding(20.dp)
-                        .padding(top = paddingValues.calculateTopPadding())
-                ) {
-                    item {
-                        Text(
-                            text = "Quote of the day for you:",
-                            style = MaterialTheme.typography.titleLarge.copy(fontSize = 30.sp),
-                            color = MaterialTheme.colorScheme.onBackground
-                        )
-                        Spacer(modifier = Modifier.height(20.dp))
-                    }
+        // Заменяем код с Text на вызов нашего компонента LoadingOrErrorState
+        LoadingOrErrorState(isLoading = isLoading, errorMessage = errorMessage)
 
-                    item { QuoteCard(quote) }
+        // Если не загрузка и нет ошибки, продолжаем рендерить контент
+        if (!isLoading && errorMessage == null) {
+            LazyColumn(
+                modifier = Modifier
+                    .padding(20.dp)
+                    .padding(top = paddingValues.calculateTopPadding())
+            ) {
+                item {
+                    Text(
+                        text = "Quote of the day for you:",
+                        style = MaterialTheme.typography.titleLarge.copy(fontSize = 30.sp),
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                    Spacer(modifier = Modifier.height(20.dp))
+                }
 
-                    item {
-                        FavoriteButton(
-                            isFavorite = isFavorite, // Передаем isFavorite для изменения цвета кнопки
-                            onClick = {
-                                if (quote != null) {
-                                    if (isFavorite) {
-                                        favoritesViewModel.removeFromFavorites(quote)
-                                    } else {
-                                        favoritesViewModel.addToFavorites(quote)
-                                        // Показать всплывающее сообщение
-                                        Toast.makeText(context, "Quote added to Favorites!", Toast.LENGTH_SHORT).show()
-                                    }
+                item { QuoteCard(quote) }
+
+                item {
+                    FavoriteButton(
+                        isFavorite = isFavorite, // Передаем isFavorite для изменения цвета кнопки
+                        onClick = {
+                            if (quote != null) {
+                                if (isFavorite) {
+                                    favoritesViewModel.removeFromFavorites(quote)
+                                } else {
+                                    favoritesViewModel.addToFavorites(quote)
+                                    // Показать всплывающее сообщение
+                                    Toast.makeText(context, "Quote added to Favorites!", Toast.LENGTH_SHORT).show()
                                 }
                             }
-                        )
-                    }
+                        }
+                    )
                 }
             }
         }
