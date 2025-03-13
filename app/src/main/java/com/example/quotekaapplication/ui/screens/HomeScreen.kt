@@ -7,9 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
@@ -34,7 +32,7 @@ fun HomeScreen(
     val errorMessage = quoteViewModel.errorMessage.value
     val isFavorite = quote != null && favoritesViewModel.favoriteQuotes.value.contains(quote)
 
-    // Получаем контекст для отображения Toast
+    // get context for showing Toast
     val context = LocalContext.current
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -48,10 +46,10 @@ fun HomeScreen(
                 .graphicsLayer(alpha = 0.4f)
         )
 
-        // Заменяем код с Text на вызов нашего компонента LoadingOrErrorState
+        //LoadingOrErrorState
         LoadingOrErrorState(isLoading = isLoading, errorMessage = errorMessage)
 
-        // Если не загрузка и нет ошибки, продолжаем рендерить контент
+        // will go on rendering
         if (!isLoading && errorMessage == null) {
             LazyColumn(
                 modifier = Modifier
@@ -71,14 +69,14 @@ fun HomeScreen(
 
                 item {
                     FavoriteButton(
-                        isFavorite = isFavorite, // Передаем isFavorite для изменения цвета кнопки
+                        isFavorite = isFavorite, // pass isFavorite to the FavoriteButton to change its color
                         onClick = {
                             if (quote != null) {
                                 if (isFavorite) {
                                     favoritesViewModel.removeFromFavorites(quote)
                                 } else {
                                     favoritesViewModel.addToFavorites(quote)
-                                    // Показать всплывающее сообщение
+                                    // show the toast message
                                     Toast.makeText(context, "Quote added to Favorites!", Toast.LENGTH_SHORT).show()
                                 }
                             }
