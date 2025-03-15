@@ -55,7 +55,7 @@ android {
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:33.10.0"))
+    implementation(libs.firebase.bom.v33100)
     implementation(libs.firebase.auth)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -65,19 +65,21 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation (libs.androidx.datastore.preferences)
+    implementation (libs.gson)
     implementation(libs.navigation.compose)
     implementation(libs.androidx.foundation)
     implementation(libs.firebase.ui.auth)
-    implementation("androidx.compose.ui:ui-text-google-fonts:1.7.8")
+    implementation(libs.androidx.ui.text.google.fonts)
     implementation(libs.material)
     implementation(libs.accompanist.systemuicontroller)
     // for coroutines
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
+    implementation (libs.kotlinx.coroutines.android)
     // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.runtime.livedata)
 
     testImplementation(libs.junit)

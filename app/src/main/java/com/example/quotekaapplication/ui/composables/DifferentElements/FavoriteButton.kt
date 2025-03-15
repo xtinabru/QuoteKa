@@ -21,6 +21,9 @@ import com.example.quotekaapplication.ui.theme.Purple
 
 @Composable
 fun FavoriteButton(isFavorite: Boolean, onClick: () -> Unit) {
+    // В этом примере isFavorite передается как пропс, но мы можем управлять этим состоянием в родительском экране.
+    // Поэтому, для этого примера предполагаем, что состояние "избранное" контролируется выше (например, в HomeScreen).
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -31,16 +34,18 @@ fun FavoriteButton(isFavorite: Boolean, onClick: () -> Unit) {
                 .align(Alignment.BottomEnd)
                 .size(50.dp)
                 .background(Color.White, shape = CircleShape)
-                .border(2.dp, Purple, shape = CircleShape)
+                .border(2.dp, if (isFavorite) Color.Red else Purple, shape = CircleShape) // Меняем цвет рамки
         ) {
             IconButton(
-                onClick = onClick,
+                onClick = {
+                    onClick() // Вызываем onClick, чтобы обработать добавление/удаление из избранного
+                },
                 modifier = Modifier.fillMaxSize()
             ) {
                 Icon(
                     imageVector = Icons.Default.Favorite,
                     contentDescription = "Add to Favorites",
-                    tint = if (isFavorite) Color.Red else Purple, // Цвет меняется на красный если цитата в избранном
+                    tint = if (isFavorite) Color.Red else Purple, // Цвет иконки
                     modifier = Modifier.size(32.dp)
                 )
             }

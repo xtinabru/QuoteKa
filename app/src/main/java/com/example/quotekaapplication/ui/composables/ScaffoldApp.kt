@@ -8,10 +8,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.quotekaapplication.ui.composables.BottomAppBar.BottomBar
-import com.example.quotekaapplication.ui.screens.AddQuoteScreen
-import com.example.quotekaapplication.ui.screens.CategoriesScreen
-import com.example.quotekaapplication.ui.screens.FavoriteScreen
 import com.example.quotekaapplication.ui.screens.Authentication.LoginScreen
+import com.example.quotekaapplication.ui.screens.FavoritesScreen
 import com.example.quotekaapplication.ui.screens.HomeScreen
 import com.example.quotekaapplication.ui.screens.OnBoardingScreen.OnBoardingScreen
 import com.example.quotekaapplication.ui.screens.ProfileScreen
@@ -49,10 +47,8 @@ fun ScaffoldApp() {
                 modifier = Modifier.padding(paddingValues)
             ) {
                 composable(route = "home")  { HomeScreen( paddingValues) }
-                composable("categories") { CategoriesScreen() }
-                composable("add_quote") { AddQuoteScreen() }
                 composable(route = "info")  { QuoteInfo(navController, paddingValues) }
-                composable("favorite") { FavoriteScreen() }
+                composable("favorite") { FavoritesScreen(paddingValues) }
                 composable(route = "settings")  { SettingsScreen(navController, paddingValues) }
                 composable("profile") { ProfileScreen() }
                 composable("onboarding") {
