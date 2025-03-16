@@ -1,25 +1,30 @@
 package com.example.quotekaapplication.ui.viewmodels
 
-import androidx.compose.runtime.State
+import android.content.Context
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.quotekaapplication.data.models.Quote
+import com.example.quotekaapplication.utils.FavoritesManager
 
-class FavoritesViewModel : ViewModel() {
-    // Список любимых цитат
-    private val _favoriteQuotes = mutableStateOf<List<Quote>>(emptyList())
-    val favoriteQuotes: State<List<Quote>> = _favoriteQuotes
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
-    // Добавление в избранное
+class FavoritesViewModel(context: Context) : ViewModel() {
+    private val favoritesManager = FavoritesManager(context)
+
+    // Статический список избранных цитат
+    private val _favoriteQuotes = MutableStateFlow<List<Quote>>(favoritesManager.getFavorites()) // Здесь использую StateFlow
+    val favoriteQuotes: StateFlow<List<Quote>> get() = _favoriteQuotes // Подписка на изменения
+
+    // Добавление цитаты в избранное
     fun addToFavorites(quote: Quote) {
-        // Избегаем дублирования цитат
-        if (!favoriteQuotes.value.contains(quote)) {
-            _favoriteQuotes.value = _favoriteQuotes.value + quote
-        }
+        favoritesManager.addToFavorites(quote)
+        _favoriteQuotes.value = favoritesManager.getFavorites() // Обновляем список
     }
 
-    // Удаление из избранного
+    // Удаление цитаты из избранного
     fun removeFromFavorites(quote: Quote) {
-        _favoriteQuotes.value = _favoriteQuotes.value.filter { it != quote }
+        favoritesManager.removeFromFavorites(quote)
+        _favoriteQuotes.value = favoritesManager.getFavorites() // Обновляем список
     }
 }

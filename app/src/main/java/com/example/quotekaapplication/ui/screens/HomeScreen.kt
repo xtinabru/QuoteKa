@@ -16,8 +16,9 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.quotekaapplication.R
 import com.example.quotekaapplication.ui.viewmodels.QuoteViewModel
-import com.example.quotekaapplication.ui.composables.DifferentElements.FavoriteButton
 import com.example.quotekaapplication.ui.viewmodels.FavoritesViewModel
+import com.example.quotekaapplication.ui.viewmodels.FavoritesViewModelFactory // Импортируем фабрику
+import com.example.quotekaapplication.ui.composables.DifferentElements.FavoriteButton // Импортируем FavoriteButton
 import androidx.compose.ui.platform.LocalContext
 import com.example.quotekaapplication.ui.composables.DifferentElements.LoadingOrErrorState // Импортируем наш новый компонент
 
@@ -25,18 +26,19 @@ import com.example.quotekaapplication.ui.composables.DifferentElements.LoadingOr
 fun HomeScreen(
     paddingValues: PaddingValues,
     quoteViewModel: QuoteViewModel = viewModel(),
-    favoritesViewModel: FavoritesViewModel = viewModel()
+    favoritesViewModel: FavoritesViewModel = viewModel(
+        factory = FavoritesViewModelFactory(LocalContext.current) // Используем фабрику для FavoritesViewModel
+    )
 ) {
     val quote = quoteViewModel.quoteOfTheDay.value
     val isLoading = quoteViewModel.isLoading.value
     val errorMessage = quoteViewModel.errorMessage.value
-    val isFavorite = quote != null && favoritesViewModel.favoriteQuotes.value.contains(quote)
+    val isFavorite = quote != null && favoritesViewModel.favoriteQuotes.value.contains(quote) // Сравниваем объекты Quote
 
     // get context for showing Toast
     val context = LocalContext.current
 
     Box(modifier = Modifier.fillMaxSize()) {
-
         Image(
             painter = painterResource(id = R.drawable.background_image),
             contentDescription = null,
@@ -49,7 +51,6 @@ fun HomeScreen(
         //LoadingOrErrorState
         LoadingOrErrorState(isLoading = isLoading, errorMessage = errorMessage)
 
-        // will go on rendering
         if (!isLoading && errorMessage == null) {
             LazyColumn(
                 modifier = Modifier
@@ -69,14 +70,13 @@ fun HomeScreen(
 
                 item {
                     FavoriteButton(
-                        isFavorite = isFavorite, // pass isFavorite to the FavoriteButton to change its color
+                        isFavorite = isFavorite,
                         onClick = {
                             if (quote != null) {
                                 if (isFavorite) {
-                                    favoritesViewModel.removeFromFavorites(quote)
+                                    favoritesViewModel.removeFromFavorites(quote) // Работаем с объектом Quote
                                 } else {
-                                    favoritesViewModel.addToFavorites(quote)
-                                    // show the toast message
+                                    favoritesViewModel.addToFavorites(quote) // Работаем с объектом Quote
                                     Toast.makeText(context, "Quote added to Favorites!", Toast.LENGTH_SHORT).show()
                                 }
                             }
