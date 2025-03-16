@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">Quoteka Application</string>
+    <string name="loading">Loading...</string>
+    <string name="welcome_back">Welcome back👋🏻</string>
+    <string name="sign_in_to_your_account">Sign in to your account</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login">Login</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="don_t_have_an_account">"Don't have an account? "</string>
+    <string name="sign_up">Sign up</string>
+    <string name="create_account">Create account</string>
+    <string name="register">Register</string>
+    <string name="registration_successful">Registration successful</string>
+    <string name="already_have_an_account_login">Already have an account? Login</string>
+    <string name="by_clicking_register_you_agree_to_our">By clicking Register, you agree to our</string>
+    <string name="terms_data_policy">Terms, Data Policy.</string>
+    <string name="get_started">Get Started</string>
+    <string name="your_favorite_quotes">Your Favorite Quotes</string>
+    <string name="quote_removed_from_favorites">Quote removed from Favorites!</string>
+    <string name="no_favorite_quotes_yet">No favorite quotes yet.</string>
+    <string name="quote_of_the_day_for_you">Quote of the day for you:</string>
+    <string name="quote_added_to_favorites">Quote added to Favorites!</string>
+    <string name="hello">Hello, %1$s!</string>
+    <string name="change_password">Change Password</string>
+    <string name="log_out">Log Out</string>
+    <string name="unknown">Unknown</string>
+    <string name="about_app">About app</string>
+    <string name="this_app_shows_you_new_quotes_everyday">This app shows you new quotes everyday.</string>
+    <string name="visit_our_website">Visit our website</string>
+    <string name="back">Back</string>
+    <string name="settings">Settings</string>
+    <string name="toggle_dark_mode">Toggle Dark Mode</string>
+    <string name="notifications_settings">Notifications Settings</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_service">Terms of Service</string>
 </resources>

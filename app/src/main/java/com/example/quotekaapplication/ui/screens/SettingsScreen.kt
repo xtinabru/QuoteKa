@@ -5,9 +5,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.quotekaapplication.R
 import com.example.quotekaapplication.ui.composables.DifferentElements.BackgroundImage
 import com.example.quotekaapplication.ui.composables.DifferentElements.SmallButton
 import com.example.quotekaapplication.ui.screens.Authentication.Login.BackButton
@@ -25,11 +27,11 @@ fun SettingsScreen(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            // Используем BackButton для навигации назад
+
             BackButton(navController = navController, modifier = Modifier.padding(top = 16.dp))
 
             Text(
-                text = "Settings",
+                text = stringResource(R.string.settings),
                 fontSize = 24.sp,
                 style = MaterialTheme.typography.headlineLarge,
                 modifier = Modifier.padding(top = 40.dp)
@@ -37,70 +39,58 @@ fun SettingsScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(40.dp))
 
-            // Кнопка для изменения пароля
             SmallButton(
-                text = "Change Password",
+                text = stringResource(R.string.change_password),
                 onClick = {
-                    // Действие при нажатии на кнопку
-                    // Переход на экран изменения пароля
+                // logic
                 },
                 modifier = Modifier
                     .padding(vertical = 8.dp)
-                    .widthIn(max = 250.dp) // Ограничение по максимальной ширине
-                    .align(Alignment.CenterHorizontally)
-            )
-
-
-
-            // Кнопка для включения/выключения темной темы
-            SmallButton(
-                text = "Toggle Dark Mode",
-                onClick = {
-                    // Действие для переключения темы
-                    // Можно использовать ViewModel для сохранения состояния
-                },
-                modifier = Modifier
-                    .padding(vertical = 8.dp)
-                    .widthIn(max = 250.dp) // Ограничение по максимальной ширине
-                    .align(Alignment.CenterHorizontally)
-            )
-
-            // Кнопка для управления уведомлениями
-            SmallButton(
-                text = "Notifications Settings",
-                onClick = {
-                    // Действие для управления уведомлениями
-                    // Например, открытие экрана уведомлений
-                },
-                modifier = Modifier
-                    .padding(vertical = 8.dp)
-                    .widthIn(max = 250.dp) // Ограничение по максимальной ширине
-                    .align(Alignment.CenterHorizontally)
-            )
-
-
-
-
-            // Кнопка для перехода к юридическим документам
-            SmallButton(
-                text = "Privacy Policy",
-                onClick = {
-                    // Открыть политику конфиденциальности
-                },
-                modifier = Modifier
-                    .padding(vertical = 8.dp)
-                    .widthIn(max = 250.dp) // Ограничение по максимальной ширине
+                    .widthIn(max = 250.dp)
                     .align(Alignment.CenterHorizontally)
             )
 
             SmallButton(
-                text = "Terms of Service",
+                text = stringResource(R.string.toggle_dark_mode),
                 onClick = {
-                    // Открыть условия использования
+                   // logic
                 },
                 modifier = Modifier
                     .padding(vertical = 8.dp)
-                    .widthIn(max = 250.dp) // Ограничение по максимальной ширине
+                    .widthIn(max = 250.dp)
+                    .align(Alignment.CenterHorizontally)
+            )
+
+            SmallButton(
+                text = stringResource(R.string.notifications_settings),
+                onClick = {
+                    // logic
+                },
+                modifier = Modifier
+                    .padding(vertical = 8.dp)
+                    .widthIn(max = 250.dp)
+                    .align(Alignment.CenterHorizontally)
+            )
+
+            SmallButton(
+                text = stringResource(R.string.privacy_policy),
+                onClick = {
+                    // logic
+                },
+                modifier = Modifier
+                    .padding(vertical = 8.dp)
+                    .widthIn(max = 250.dp)
+                    .align(Alignment.CenterHorizontally)
+            )
+
+            SmallButton(
+                text = stringResource(R.string.terms_of_service),
+                onClick = {
+                    // logic
+                },
+                modifier = Modifier
+                    .padding(vertical = 8.dp)
+                    .widthIn(max = 250.dp)
                     .align(Alignment.CenterHorizontally)
             )
         }

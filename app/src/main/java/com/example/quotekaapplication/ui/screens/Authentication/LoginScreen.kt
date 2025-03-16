@@ -7,6 +7,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -24,14 +25,17 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
     var errorMessage by remember { mutableStateOf("") }
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         BackButton(navController)
         Spacer(modifier = Modifier.height(32.dp))
-        MainHeader(navController,
-            text = "Welcome back\uD83D\uDC4B\uD83C\uDFFB",
+        MainHeader(
+            navController,
+            text = stringResource(R.string.welcome_back),
             modifier = Modifier
                 .padding(12.dp)
                 .align(Alignment.Start),
@@ -39,7 +43,7 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
         Spacer(modifier = Modifier.height(2.dp))
 
         Text(
-            text = "Sign in to your account",
+            text = stringResource(R.string.sign_in_to_your_account),
             modifier = Modifier
                 .padding(12.dp)
                 .align(Alignment.Start),
@@ -81,7 +85,8 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
 
         TextButton(onClick = { /* logic */ },
             modifier = Modifier.align(Alignment.Start)) {
-            Text("Forgot Password?",
+            Text(
+                stringResource(R.string.forgot_password),
                 style = TextStyle(
                     color = MaterialTheme.colorScheme.primary,
                     fontSize = 18.sp,
@@ -93,7 +98,7 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
         Spacer(modifier = Modifier.height(16.dp))
 
         OnBoardingButton(
-            text = "Login",
+            text = stringResource(R.string.login),
             onClick = {
                 authViewModel.login(
                     onSuccess = {
@@ -111,7 +116,7 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
         Spacer(modifier = Modifier.height(18.dp))
 
         OnBoardingButton(
-            text = "Sign in with Google",
+            text = stringResource(R.string.sign_in_with_google),
             onClick = { /* logic */ },
             backgroundColor = MaterialTheme.colorScheme.background,
             textColor = MaterialTheme.colorScheme.onSurface,
@@ -127,7 +132,7 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Don't have an account? ",
+                text = stringResource(R.string.don_t_have_an_account),
                 style = TextStyle(
                     color = MaterialTheme.colorScheme.onBackground,
                     fontSize = 18.sp,
@@ -135,7 +140,8 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
                 )
             )
             TextButton(onClick = { navController.navigate("register") }) {
-                Text("Sign up",
+                Text(
+                    stringResource(R.string.sign_up),
                     style = TextStyle(
                         color = MaterialTheme.colorScheme.primary,
                         fontSize = 18.sp,

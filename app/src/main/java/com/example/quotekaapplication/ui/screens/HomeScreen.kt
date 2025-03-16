@@ -20,6 +20,7 @@ import com.example.quotekaapplication.ui.viewmodels.FavoritesViewModel
 import com.example.quotekaapplication.ui.viewmodels.FavoritesViewModelFactory
 import com.example.quotekaapplication.ui.composables.DifferentElements.FavoriteButton
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import com.example.quotekaapplication.ui.composables.DifferentElements.BackgroundImage
 import com.example.quotekaapplication.ui.composables.DifferentElements.LoadingOrErrorState
 
@@ -53,7 +54,7 @@ fun HomeScreen(
             ) {
                 item {
                     Text(
-                        text = "Quote of the day for you:",
+                        text = stringResource(R.string.quote_of_the_day_for_you),
                         style = MaterialTheme.typography.titleLarge.copy(fontSize = 30.sp),
                         color = MaterialTheme.colorScheme.onBackground
                     )
@@ -68,10 +69,11 @@ fun HomeScreen(
                         onClick = {
                             if (quote != null) {
                                 if (isFavorite) {
-                                    favoritesViewModel.removeFromFavorites(quote) // Работаем с объектом Quote
+                                    favoritesViewModel.removeFromFavorites(quote)
                                 } else {
-                                    favoritesViewModel.addToFavorites(quote) // Работаем с объектом Quote
-                                    Toast.makeText(context, "Quote added to Favorites!", Toast.LENGTH_SHORT).show()
+                                    favoritesViewModel.addToFavorites(quote)
+                                    Toast.makeText(context,
+                                        context.getString(R.string.quote_added_to_favorites), Toast.LENGTH_SHORT).show()
                                 }
                             }
                         }

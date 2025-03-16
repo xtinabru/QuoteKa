@@ -18,7 +18,6 @@ class AuthViewModel : ViewModel() {
     // validation error
     var validationError = mutableStateOf<String?>(null)
 
-
   // ________________________________________
         // TO STAY LOGGED IN WHEN REFRESH
     // Check if the user is already logged in
@@ -30,12 +29,11 @@ class AuthViewModel : ViewModel() {
     private fun checkUserAuthenticationStatus() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            email.value = currentUser.email ?: "" // Получаем email текущего пользователя
+            email.value = currentUser.email ?: "" // get email of the current user
         }
         isAuthenticated.value = currentUser != null
 
     }
-
 
  // _________________________________________________
 

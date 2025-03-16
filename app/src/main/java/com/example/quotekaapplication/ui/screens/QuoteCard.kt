@@ -15,10 +15,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.quotekaapplication.R
 import com.example.quotekaapplication.data.models.Quote
 
 @Composable
@@ -38,8 +40,10 @@ fun QuoteCard(quote: Quote?) {
                 backgroundColor,
                 shape = MaterialTheme.shapes.medium
             )
-            .border(1.dp, MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.6f),
-                shape = MaterialTheme.shapes.medium)
+            .border(
+                1.dp, MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.6f),
+                shape = MaterialTheme.shapes.medium
+            )
             .padding(16.dp)
     ) {
         val scrollState = rememberScrollState()
@@ -49,7 +53,7 @@ fun QuoteCard(quote: Quote?) {
                 .fillMaxSize()
         ) {
             Text(
-                text = quote?.quote ?: "Loading...",
+                text = quote?.quote ?: stringResource(R.string.loading),
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontSize = 24.sp,
                     lineHeight = 34.sp,
@@ -62,7 +66,7 @@ fun QuoteCard(quote: Quote?) {
                 overflow = TextOverflow.Visible,
             )
             Text(
-                text = "\n- ${quote?.author ?: "Unknown"}",
+                text = "\n- ${quote?.author ?: stringResource(R.string.unknown)}",
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontSize = 20.sp,
                     lineHeight = 34.sp,

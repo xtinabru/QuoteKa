@@ -8,24 +8,25 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SmallButton(
+    modifier: Modifier = Modifier,
     text: String,
     onClick: () -> Unit,
     backgroundColor: Color = MaterialTheme.colorScheme.primary,
     textColor: Color = MaterialTheme.colorScheme.onPrimary,
-    modifier: Modifier = Modifier
+
 ) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = backgroundColor),
         modifier = modifier
             .fillMaxWidth()
-            .height(60.dp) // Размер кнопки
-            .padding(vertical = 8.dp), // Отступы между кнопками
+            .height(60.dp)
+            .padding(vertical = 8.dp),
     ) {
         Text(
             text = text,
             color = textColor,
-            style = MaterialTheme.typography.bodyLarge // Стиль текста
+            style = MaterialTheme.typography.bodyLarge
         )
     }
 }

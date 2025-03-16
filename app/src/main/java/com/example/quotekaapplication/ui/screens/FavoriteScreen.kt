@@ -1,7 +1,6 @@
 package com.example.quotekaapplication.ui.screens
 
 import android.widget.Toast
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -16,9 +15,12 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.quotekaapplication.ui.viewmodels.FavoritesViewModel
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import com.example.quotekaapplication.R
 import com.example.quotekaapplication.ui.composables.DifferentElements.BackgroundImage
 import com.example.quotekaapplication.ui.composables.DifferentElements.DeleteButton
 import com.example.quotekaapplication.ui.viewmodels.FavoritesViewModelFactory
+
 @Composable
 fun FavoritesScreen(
     paddingValues: PaddingValues,
@@ -40,7 +42,7 @@ fun FavoritesScreen(
         Column(modifier = Modifier.padding(16.dp)) {
             Spacer(modifier = Modifier.height(40.dp))
             Text(
-                text = "Your Favorite Quotes",
+                text = stringResource(R.string.your_favorite_quotes),
                 style = MaterialTheme.typography.titleLarge.copy(fontSize = 30.sp),
                 color = MaterialTheme.colorScheme.onBackground
             )
@@ -53,16 +55,19 @@ fun FavoritesScreen(
                         .padding(16.dp)
                         .padding(top = paddingValues.calculateTopPadding())
                 ) {
-                    items(favoriteQuotes) { quote -> // Используем функцию items для отображения элементов
+                    items(favoriteQuotes) { quote -> // use function items to show the elements
                         Spacer(modifier = Modifier.height(30.dp))
 
-                        // Обернуть каждую цитату в свой контейнер с фоном и границей
+                        // each quote in a sep container
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .background(backgroundColor, shape = MaterialTheme.shapes.medium)
-                                .border(1.dp, MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.6f),
-                                    shape = MaterialTheme.shapes.medium)
+                                .border(
+                                    1.dp,
+                                    MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.6f),
+                                    shape = MaterialTheme.shapes.medium
+                                )
                                 .padding(16.dp)
                         ) {
                             Column {
@@ -77,7 +82,8 @@ fun FavoritesScreen(
                                 DeleteButton(
                                     onClick = {
                                         favoritesViewModel.removeFromFavorites(quote)
-                                        Toast.makeText(context, "Quote removed from Favorites!", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(context,
+                                            context.getString(R.string.quote_removed_from_favorites), Toast.LENGTH_SHORT).show()
                                     }
                                 )
                             }
@@ -86,7 +92,7 @@ fun FavoritesScreen(
                 }
             } else {
                 Text(
-                    text = "No favorite quotes yet.",
+                    text = stringResource(R.string.no_favorite_quotes_yet),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onBackground
                 )

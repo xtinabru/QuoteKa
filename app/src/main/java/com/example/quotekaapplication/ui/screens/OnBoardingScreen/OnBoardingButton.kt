@@ -31,7 +31,7 @@ fun OnBoardingButton(
         modifier = Modifier
             .fillMaxWidth()
             .height(50.dp)
-            .shadow(shadowElevation, shape = RoundedCornerShape(30)), // Тень
+            .shadow(shadowElevation, shape = RoundedCornerShape(30)),
         colors = ButtonDefaults.buttonColors(
             containerColor = backgroundColor
         )

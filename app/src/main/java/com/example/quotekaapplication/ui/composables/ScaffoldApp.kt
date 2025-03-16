@@ -25,7 +25,7 @@ fun ScaffoldApp() {
     val authViewModel: AuthViewModel = viewModel()
     val bottomBarViewModel: BottomBarViewModel = viewModel()
 
-    val currentRoute = bottomBarViewModel.currentRoute ?: "QuoteKa"
+    val currentRoute = bottomBarViewModel.currentRoute
     val isAuthenticated = authViewModel.isAuthenticated.value
 
     Scaffold(

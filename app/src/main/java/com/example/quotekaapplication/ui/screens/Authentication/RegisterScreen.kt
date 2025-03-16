@@ -8,11 +8,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.quotekaapplication.R
 import com.example.quotekaapplication.ui.composables.DifferentElements.CustomTextField
 import com.example.quotekaapplication.ui.composables.onboarding.OnBoardingButton
 import com.example.quotekaapplication.ui.screens.Authentication.Login.BackButton
@@ -26,21 +28,23 @@ fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel) {
     val validationError = authViewModel.validationError.value
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         BackButton(navController)
         Spacer(modifier = Modifier.height(32.dp))
         MainHeader(navController,
-            text = "Sign up",
+            text = stringResource(R.string.sign_up),
             modifier = Modifier
                 .padding(12.dp)
                 .align(Alignment.Start),
         )
         Spacer(modifier = Modifier.height(2.dp))
         Text(
-            text = "Create account",
+            text = stringResource(R.string.create_account),
             modifier = Modifier
                 .padding(12.dp)
                 .align(Alignment.Start),
@@ -75,13 +79,14 @@ fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel) {
         Spacer(modifier = Modifier.height(16.dp))
 
         OnBoardingButton(
-            text = "Register",
+            text = stringResource(R.string.register),
             onClick = {
                 // Calling register method from AuthViewModel
                 authViewModel.register(
                     onSuccess = {
                         // If success
-                        Toast.makeText(context, "Registration successful", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context,
+                            context.getString(R.string.registration_successful), Toast.LENGTH_SHORT).show()
                         navController.navigate("home")  // Go home
                     },
                     onFailure = { errorMessage ->
@@ -109,7 +114,8 @@ fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel) {
         TextButton(
             onClick = { navController.navigate("login") }
         ) {
-            Text("Already have an account? Login",
+            Text(
+                stringResource(R.string.already_have_an_account_login),
                 style = TextStyle(
                     color = MaterialTheme.colorScheme.primary,
                     fontSize = 18.sp,
@@ -120,12 +126,14 @@ fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel) {
         Spacer(modifier = Modifier.height(60.dp))
 
         Column(
-            modifier = Modifier.fillMaxSize().padding(16.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "By clicking Register, you agree to our",
+                text = stringResource(R.string.by_clicking_register_you_agree_to_our),
                 style = TextStyle(
                     color = MaterialTheme.colorScheme.onBackground,
                     fontSize = 18.sp,
@@ -133,7 +141,8 @@ fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel) {
                 )
             )
             TextButton(onClick = { navController.navigate("register") }) {
-                Text("Terms, Data Policy.",
+                Text(
+                    stringResource(R.string.terms_data_policy),
                     style = TextStyle(
                         color = MaterialTheme.colorScheme.primary,
                         fontSize = 18.sp,

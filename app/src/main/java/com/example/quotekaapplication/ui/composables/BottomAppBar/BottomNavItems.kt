@@ -2,11 +2,8 @@ package com.example.quotekaapplication.ui.composables.BottomAppBar
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
-import com.example.quotekaapplication.ui.composables.BottomAppBar.BottomNavItemData
 
 
 // list of all the icons
