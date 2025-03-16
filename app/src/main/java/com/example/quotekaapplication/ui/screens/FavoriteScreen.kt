@@ -13,6 +13,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.quotekaapplication.ui.viewmodels.FavoritesViewModel
 import com.example.quotekaapplication.ui.composables.DifferentElements.FavoriteButton
 import androidx.compose.ui.platform.LocalContext
+import com.example.quotekaapplication.ui.composables.DifferentElements.DeleteButton
 import com.example.quotekaapplication.ui.viewmodels.FavoritesViewModelFactory
 
 @Composable
@@ -44,21 +45,22 @@ fun FavoritesScreen(
                         .padding(top = paddingValues.calculateTopPadding())
                 ) {
                     items(favoriteQuotes) { quote -> // Используем функцию items для отображения элементов
+                        Spacer(modifier = Modifier.height(30.dp))
                         Text(
                             text = "\"${quote.quote}\" - ${quote.author}\n", // Доступ к полям объекта Quote
                             style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onBackground
                         )
-                        Spacer(modifier = Modifier.height(8.dp))
 
-                        FavoriteButton(
-                            isFavorite = true,
+
+                        DeleteButton(
                             onClick = {
-                                favoritesViewModel.removeFromFavorites(quote) // Передаем объект Quote
+                                favoritesViewModel.removeFromFavorites(quote)
                                 Toast.makeText(context, "Quote removed from Favorites!", Toast.LENGTH_SHORT).show()
                             }
                         )
-                        Spacer(modifier = Modifier.height(16.dp))
+
+
                     }
                 }
             } else {
