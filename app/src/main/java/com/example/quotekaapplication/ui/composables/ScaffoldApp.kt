@@ -47,10 +47,10 @@ fun ScaffoldApp() {
                 modifier = Modifier.padding(paddingValues)
             ) {
                 composable(route = "home")  { HomeScreen( paddingValues) }
-                composable(route = "info")  { QuoteInfo(navController, paddingValues) }
+                composable(route = "info")  { QuoteInfo(navController, ) }
                 composable("favorite") { FavoritesScreen(paddingValues) }
-                composable(route = "settings")  { SettingsScreen(navController, paddingValues) }
-                composable("profile") { ProfileScreen() }
+                composable(route = "settings")  { SettingsScreen(navController) }
+                composable("profile") { ProfileScreen(navController) }
                 composable("onboarding") {
                     val onBoardingViewModel: OnBoardingViewModel = viewModel()
                     OnBoardingScreen(navController, onBoardingViewModel)

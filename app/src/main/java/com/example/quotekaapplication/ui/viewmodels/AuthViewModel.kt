@@ -29,8 +29,14 @@ class AuthViewModel : ViewModel() {
 
     private fun checkUserAuthenticationStatus() {
         val currentUser = auth.currentUser
+        if (currentUser != null) {
+            email.value = currentUser.email ?: "" // Получаем email текущего пользователя
+        }
         isAuthenticated.value = currentUser != null
+
     }
+
+
  // _________________________________________________
 
     // inputs
@@ -102,6 +108,8 @@ class AuthViewModel : ViewModel() {
         auth.signInWithEmailAndPassword(email.value, password.value)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    val currentUser = auth.currentUser
+                    email.value = currentUser?.email ?: ""
                     isAuthenticated.value = true
                     onSuccess()
                 } else {
@@ -115,6 +123,7 @@ class AuthViewModel : ViewModel() {
     //LOGOUT
     fun logout() {
         auth.signOut()
+        email.value = ""
         isAuthenticated.value = false
     }
 }

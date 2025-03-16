@@ -35,7 +35,7 @@ fun DeleteButton(onClick: () -> Unit) {
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .size(50.dp)
-                .background(Color.White, shape = CircleShape)
+                .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.6f), shape = CircleShape)
                 .border(2.dp, Color.Red, shape = CircleShape)
 
         ) {

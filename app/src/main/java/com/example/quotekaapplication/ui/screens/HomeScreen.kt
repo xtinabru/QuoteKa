@@ -17,17 +17,18 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.quotekaapplication.R
 import com.example.quotekaapplication.ui.viewmodels.QuoteViewModel
 import com.example.quotekaapplication.ui.viewmodels.FavoritesViewModel
-import com.example.quotekaapplication.ui.viewmodels.FavoritesViewModelFactory // Импортируем фабрику
-import com.example.quotekaapplication.ui.composables.DifferentElements.FavoriteButton // Импортируем FavoriteButton
+import com.example.quotekaapplication.ui.viewmodels.FavoritesViewModelFactory
+import com.example.quotekaapplication.ui.composables.DifferentElements.FavoriteButton
 import androidx.compose.ui.platform.LocalContext
-import com.example.quotekaapplication.ui.composables.DifferentElements.LoadingOrErrorState // Импортируем наш новый компонент
+import com.example.quotekaapplication.ui.composables.DifferentElements.BackgroundImage
+import com.example.quotekaapplication.ui.composables.DifferentElements.LoadingOrErrorState
 
 @Composable
 fun HomeScreen(
     paddingValues: PaddingValues,
     quoteViewModel: QuoteViewModel = viewModel(),
     favoritesViewModel: FavoritesViewModel = viewModel(
-        factory = FavoritesViewModelFactory(LocalContext.current) // Используем фабрику для FavoritesViewModel
+        factory = FavoritesViewModelFactory(LocalContext.current)
     )
 ) {
     val quote = quoteViewModel.quoteOfTheDay.value
@@ -39,14 +40,7 @@ fun HomeScreen(
     val context = LocalContext.current
 
     Box(modifier = Modifier.fillMaxSize()) {
-        Image(
-            painter = painterResource(id = R.drawable.background_image),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxSize()
-                .graphicsLayer(alpha = 0.4f)
-        )
+        BackgroundImage()
 
         //LoadingOrErrorState
         LoadingOrErrorState(isLoading = isLoading, errorMessage = errorMessage)
